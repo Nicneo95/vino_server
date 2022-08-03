@@ -1,0 +1,18 @@
+{
+  "name": "wine-o-wine-co._server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Nicneo95/wine-o-wine-co._server.git",
+  "author": "Nicneo95 <neo.hongsheng@trentglobal.edu.sg>",
+  "license": "MIT",
+  "dependencies": {
+    "db-migrate": "^0.11.13",
+    "db-migrate-mysql": "^2.2.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "hbs": "^4.2.0",
+    "mysql": "^2.18.1",
+    "wax-on": "^1.2.2"
+  },
+  "devDependencies": {}
+}

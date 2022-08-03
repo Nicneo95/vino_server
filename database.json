@@ -1,0 +1,8 @@
+{
+    "dev": {
+      "driver": "mysql",
+      "user": "nic",
+      "password":"neo",
+      "database":"wine"
+    }
+  }
