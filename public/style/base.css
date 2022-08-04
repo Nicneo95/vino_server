@@ -1,191 +1,166 @@
-/************ default css ************/
-* {
+body {
     margin: 0;
-    padding: 0;
+}
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 75px;
+:root {
+    --lightest-gray: rgb(244, 244, 244);
+    --light-gray: rgb(144, 144, 144);
+    --medium-gray: rgb(96, 96, 96);
+    --dark-gray: rgb(13, 13, 13);
+    --header-height: 40px;
+    --animation-duration: 200ms;
+    --animation-timing-curve: ease-in-out;
 }
 
-body {
-    font-weight: 400;
-    overflow-x: hidden;
+.header {
+    display: flex;
+    align-items: center;
+    position: sticky;
     position: relative;
-    background-color: black !important;
-    color: #fff !important;
-    font-family: 'Libre Baskerville', sans-serif !important;
+    top: 0;
+    background-color: white;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .4);
+    padding: 0 .5rem;
+    height: var(--header-height);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-    padding: 0;
-    line-height: normal;
-}
-
-p,
-a,
-li,
-button,
-ul {
-    margin: 0;
-    padding: 0;
-    line-height: normal;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-img {
-    width: 100%;
-    height: auto;
-}
-
-button {
-    border: 0;
-    background-color: transparent;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-}
-
-@media (min-width:1700px) {
-    main .container {
-        max-width: 100%;
-        padding: 0 150px;
-    }
-}
-
-p.success {
-    color: green;
-}
-
-p.danger {
+.header a {
     color: red;
-}
-
-/* Create a top navigation bar with a black background color  */
-.topnav {
-    background-color: #333;
-    overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
-    color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* Create a right-aligned (split) link inside the navigation bar */
-.topnav a.split {
-    float: right;
-    background-color: #04AA6D;
-    color: white;
-}
-
-/* .icon-bar {
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-    width: 90px;
-    background-color: #555;
-    height: 100vh;
-}
-
-.icon-bar a {
-    display: block;
-    text-align: center;
-    padding: 16px;
-    transition: all 0.3s ease;
-    color: white;
-    font-size: 36px;
-    transition: 0.3s;
-}
-
-.icon-bar a:hover {
-    background-color: #000;
-}
-
-.active {
-    background-color: #04AA6D;
-} */
-
-/* The side navigation menu */
-.sidenav {
-    height: 94%; /* 100% Full-height */
-    width: 50px; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    top: 50px;
-    bottom: -50px; /* Stay at the top */
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  }
-  
-  /* The navigation menu links */
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-  
-  /* Position and style the close button (top right corner) */
-  .sidenav .closebtn {
+.header a.split {
     position: absolute;
-    top: 0;
     right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #main {
-    transition: margin-left .5s;
-    padding: 20px;
-  }
-  
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
+    color: red;
+}
+
+.menu-icon-btn {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.menu-icon {
+    width: 25px;
+    height: 25px;
+    fill: var(--medium-gray);
+    cursor: pointer;
+}
+
+.menu-icon:hover {
+    fill: var(--dark-gray);
+}
+
+.sidebar {
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 75px;
+    border-right: 1px solid var(--light-gray);
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    align-items: center;
+    justify-content: stretch;
+    transition: width var(--animation-duration) var(--animation-timing-curve);
+    position: sticky;
+    left: 0;
+    top: var(--header-height);
+}
+
+.middle-sidebar,
+.bottom-sidebar {
+    width: 100%;
+}
+
+.container {
+    display: flex;
+}
+
+.content {
+    margin: 1rem;
+}
+
+.sidebar-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+}
+
+.sidebar-icon {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+}
+
+.sidebar-list .hidden-sidebar {
+    margin-left: 1.5rem;
+    white-space: nowrap;
+}
+
+.sidebar-link {
+    display: flex;
+    width: 100%;
+    padding: .5rem 0;
+    color: var(--light-gray);
+    text-decoration: none;
+    align-items: center;
+    padding-left: 25px;
+}
+
+.sidebar-list-item {
+    position: relative;
+    width: 100%;
+    fill: var(--light-gray);
+}
+
+.sidebar-list-item.active {
+    fill: var(--accent-color);
+    background-color: var(--lightest-gray);
+}
+
+.sidebar-list-item:hover {
+    background-color: var(--lightest-gray);
+}
+
+.sidebar-list-item.active::before {
+    content: "";
+    background-color: var(--accent-color);
+    height: 100%;
+    left: 0;
+    width: 3px;
+    position: absolute;
+}
+
+.sidebar.open {
+    width: 200px;
+}
+
+.sidebar .top-sidebar {
+    height: 30px;
+    transition: height var(--animation-duration) var(--animation-timing-curve);
+}
+
+.sidebar.open .top-sidebar {
+    height: 125px;
+}
+
+.sidebar .top-sidebar .hidden-sidebar {
+    text-align: center;
+    width: 100%;
+}
 
 .footer {
     position: fixed;
@@ -197,10 +172,3 @@ p.danger {
     color: white;
     text-align: center
 }
-
-#main {
-    transition: margin-left .5s;
-    padding-top: 50px;
-    padding-left: 60px;
-    padding-right: 10px;
-  }
