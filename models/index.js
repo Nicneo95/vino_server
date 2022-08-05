@@ -1,8 +1,55 @@
 const bookshelf = require('../bookshelf')
 
-// the name of the model (the first argument, must be capital letter)
-const Product = bookshelf.model('Product', {
-    tableName:'product'
+const Category = bookshelf.model('Category', {
+    tableName:'category'
 });
 
-module.exports = { Product };
+const Country = bookshelf.model('Country', {
+    tableName:'country'
+});
+
+const Region = bookshelf.model('Region', {
+    tableName:'region'
+});
+
+const Producer = bookshelf.model('Producer', {
+    tableName:'producer'
+});
+
+const Size = bookshelf.model('Size', {
+    tableName:'size',
+    products:function(){
+        return this.belongsToMany('Product')
+    }
+});
+
+const GrapeVarietal = bookshelf.model('GrapeVarietal', {
+    tableName:'grape_varietal',
+    products:function(){
+        return this.belongsToMany('Product')
+    }
+});
+
+const Product = bookshelf.model('Product', {
+    tableName:'product',
+    category: function() {
+        return this.belongsTo('Category')
+    },
+    country : function() {
+        return this.belongsTo('Country')
+    },
+    region: function() {
+        return this.belongsTo('Region')
+    },
+    producer: function() {
+        return this.belongsTo('Producer')
+    },
+    grape_varietal: function() {
+        return this.belongsToMany('GrapeVarietal');
+    },
+    size: function() {
+        return this.belongsToMany('Size');
+    },
+});
+
+module.exports = { Product, Category, Country, Region, Producer, Size, GrapeVarietal };

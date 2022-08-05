@@ -1,6 +1,7 @@
 const express = require("express");
 const hbs = require("hbs");
 const wax = require("wax-on");
+const cors = require("cors");
 require("dotenv").config();
 
 // create an instance of express app
@@ -11,6 +12,9 @@ app.set("view engine", "hbs");
 
 // static folder
 app.use(express.static("public"));
+
+// enable cross orgin
+app.use(cors());
 
 // setup wax-on
 wax.on(hbs.handlebars);
@@ -25,9 +29,11 @@ app.use(
 
 // import in routes
 const landingRoutes = require('./routes/landing');
+const productRoutes = require('./routes/products')
 
 async function main() {
     app.use('/', landingRoutes);
+    app.use('/product-information', productRoutes);
 }
 
 main();
