@@ -15,14 +15,14 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.createTable('region', {
+  return db.createTable('category', {
     id: { type: 'int', unsigned: true, autoIncrement: true, primaryKey: true },
-    name: { type: 'string', length: 150, notNull: true }
+    name: { type: 'string', length: 100, notNull: true }
   });
 };
 
 exports.down = function(db) {
-  return db.dropTable('region');
+  return db.dropTable('category');
 };
 
 exports._meta = {

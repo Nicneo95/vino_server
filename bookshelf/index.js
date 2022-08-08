@@ -4,7 +4,7 @@ const knex = require('knex')({
     connection: {
       user: 'foo',
       password:'bar',
-      database:'organic'
+      database:'vino_wine'
     }
   })
   const bookshelf = require('bookshelf')(knex)
