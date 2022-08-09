@@ -1,0 +1,35 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+
+<div class="m-3">
+
+	<a role="button" class="btn btn-primary" href="/product-information/region/create">Add New Region</a>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each regions}}
+			<tr>
+				<td>{{this.id}}</td>
+				<td>{{this.name}}</td>
+				<td>
+					<a class="btn btn-primary btn-sm" href="/product-information/region/{{this.id}}/update">Update</a>
+					<a class="btn btn-danger btn-sm" href="/product-information/region/{{this.id}}/delete">Delete</a>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+
+</div>
+
+{{/block}}
+
+{{/extends}}

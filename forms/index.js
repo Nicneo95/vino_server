@@ -39,6 +39,20 @@ const categoryForm = () => {
     })
 }
 
+const countryForm = () => {
+    return forms.create({
+        name: fields.string({
+            label: 'Country Name',
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required("Please enter the name of the country"),
+                validators.maxlength(100, "Please enter a name shorter than 100 characters")
+            ]
+        }),
+    })
+}
+
 const productForm = (category, country, region, producer, grapeVarietal, size) => {
     return forms.create({
         name: fields.string({
@@ -163,4 +177,4 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
     })
 }
 
-module.exports = { bootstrapField, categoryForm, productForm }
+module.exports = { bootstrapField, categoryForm, countryForm }
