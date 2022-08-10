@@ -53,6 +53,54 @@ const countryForm = () => {
     })
 }
 
+const producerForm = () => {
+    return forms.create({
+        name: fields.string({
+            label: 'Winery Name',
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required("Please enter the name of the winery"),
+                validators.maxlength(300, "Please enter a name shorter than 300 characters")
+            ]
+        }),
+        description: fields.string({
+            label: 'Winery Description',
+            errorAfterField: true,
+            widget: widgets.textarea(),
+            validators: [validators.maxlength(1000, "Please enter a description shorter than 1000 characters")]
+        }),
+    })
+}
+
+const regionForm = () => {
+    return forms.create({
+        name: fields.string({
+            label: 'Region Name',
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required("Please enter the name of the region"),
+                validators.maxlength(150, "Please enter a name shorter than 150 characters")
+            ]
+        }),
+    })
+}
+
+const grapeVarietalForm = () => {
+    return forms.create({
+        name: fields.string({
+            label: 'Grape Varietal',
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required("Please enter the name of the region"),
+                validators.maxlength(255, "Please enter a name shorter than 255 characters")
+            ]
+        }),
+    })
+}
+
 const productForm = (category, country, region, producer, grapeVarietal, size) => {
     return forms.create({
         name: fields.string({
@@ -177,4 +225,4 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
     })
 }
 
-module.exports = { bootstrapField, categoryForm, countryForm }
+module.exports = { bootstrapField, categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm }

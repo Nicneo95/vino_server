@@ -1,9 +1,7 @@
 {{#extends 'base'}}
 
 {{#block "content"}}
-
-<div class="m-3">
-
+<h1>Region</h1>
 	<a role="button" class="btn btn-primary" href="/product-information/region/create">Add New Region</a>
 
 	<table class="table">
@@ -15,7 +13,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#each regions}}
+			{{#each region}}
 			<tr>
 				<td>{{this.id}}</td>
 				<td>{{this.name}}</td>
@@ -27,9 +25,6 @@
 			{{/each}}
 		</tbody>
 	</table>
-
-</div>
-
 {{/block}}
 
 {{/extends}}
