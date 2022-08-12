@@ -1,18 +1,16 @@
 {{#extends 'base'}}
 
 {{#block "content"}}
-
-    <h3>Listing a new product</h3>
-    <form method="POST">
-
-        {{{form}}}
-        <div>
-            <a href="#" class="btn btn-primary" id="upload_widget">Upload Image</a>
-            <img src="" style="display:none" id="uploaded_product_image" />
-        </div>
-        <input type="submit" class="btn btn-primary mt-3" />
-    </form>
-
+<h3>Listing a New Product</h3>
+<form method="POST">
+    {{{form}}}
+    <div>
+        <a href="#" class="btn btn-secondary my-3" id="upload_widget">Upload Image</a>
+        <img src="" style="display:none" id="uploaded_product_image" />
+        <input type="submit" class="btn btn-secondary" />
+    </div>
+   
+</form>
 {{/block}}
 
 {{/extends}}

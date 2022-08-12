@@ -2,7 +2,7 @@
 
 {{#block 'content'}}
 <h1>Grape Varietal</h1>
-<a href="/product-information/grape-varietal/create" class="btn btn-primary">Add New Grape Varietal</a>
+<a href="/product-information/grape-varietal/create" class="btn btn-secondary">Add New</a>
 <table class="table">
 	<thead>
 		<tr>
@@ -17,8 +17,10 @@
 			<td>{{this.id}}</td>
 			<td>{{this.name}}</td>
 			<td>
-				<a href="/product-information/grape-varietal/{{this.id}}/update" class="btn btn-primary btn-sm">Update</a>
-				<a href="/product-information/grape-varietal/{{this.id}}/delete" class="btn btn-danger btn-sm">Delete</a>
+				<a href="/product-information/grape-varietal/{{this.id}}/update"
+					class="btn btn-secondary btn-sm">Update</a>
+				<a href="/product-information/grape-varietal/{{this.id}}/delete"
+					class="btn btn-danger btn-sm">Delete</a>
 			</td>
 		</tr>
 		{{/each}}

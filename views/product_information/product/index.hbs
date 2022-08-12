@@ -2,73 +2,60 @@
 
 {{#block "content"}}
 <h1>Product</h1>
-    <a role="button" class="btn btn-primary" href="/product-information/product/create">List New Product</a>
+<a role="button" class="btn btn-secondary" href="/product-information/product/create">List New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
+            <th>Country</th>
+            <th>Region</th>
+            <th>Category</th>
+            <th>Producer</th>
+            <th>Size</th>
+            <th>Grape Varietal</th>
 
-                <th>Country</th>
-                <th>Region</th>
-                <th>Category</th>
-                <th>Producer</th>
-                <th>Size</th>
-                <th>Grape Varietal</th>
+            <th>Price</th>
+            <th>Vintage</th>
+            <th>Quantity in stock</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each product}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
 
-                <th>Nose attribute</th>
-                <th>Mouth attribute</th>
-                <th>Alcohol percentage</th>
-                <th>Price</th>
-                <th>Vintage</th>
-                <th>Quantity in stock</th>
-                <th>Image</th>
-                <th>Action</th>
+            <td>{{this.country.name}}</td>
+            <td>{{this.region.name}}</td>
+            <td>{{this.category.name}}</td>
+            <td>{{this.producer.name}}</td>
+            <td>
+                {{#each this.size}}
+                <span class="badge bg-info">{{this.name}}</span>
+                {{/each}}
+            </td>
+            <td>
+                {{#each this.grape_varietal}}
+                <span class="badge bg-info">{{this.name}}</span>
+                {{/each}}
+            </td>
 
-            </tr>
-        </thead>
-        <tbody>
-            {{#each product}}
-            <tr>
-                <td>{{this.id}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.description}}</td>
-
-                <td>{{this.country.name}}</td>
-                <td>{{this.region.name}}</td>
-                <td>{{this.category.name}}</td>
-                <td>{{this.producer.name}}</td>
-                <td>
-                    {{#each this.size}}
-                    <span class="badge bg-primary">{{this.name}}</span>
-                    {{/each}}
-                </td>
-                <td>
-                    {{#each this.grape_varietal}}
-                    <span class="badge bg-primary">{{this.name}}</span>
-                    {{/each}}
-                </td>
-
-                <td>{{this.nose_attribute}}</td>
-                <td>{{this.mouth_attribute}}</td>
-                <td>{{this.alcohol_percentage}}</td>
-                <td>{{this.price}}</td>
-                <td>{{this.vintage}}</td>
-                <td>{{this.stock}}</td>
-                <td><img src="{{this.image_url}}" class="img-fluid" /></td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="/product-information/product/{{this.id}}/update">Update</a>
-                    <a class="btn btn-danger btn-sm" href="/product-information/product/{{this.id}}/delete">Delete</a>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-
-</div>
-
+            <td>{{this.price}}</td>
+            <td>{{this.vintage}}</td>
+            <td>{{this.stock}}</td>
+            <td><img src="{{this.image_url}}" class="img-fluid" /></td>
+            <td>
+                <a class="btn btn-secondary btn-sm m-1" href="/product-information/product/{{this.id}}/update">Update</a>
+                <a class="btn btn-danger btn-sm m-1" href="/product-information/product/{{this.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
 {{/block}}
 
 {{/extends}}

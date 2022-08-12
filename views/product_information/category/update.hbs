@@ -1,19 +1,13 @@
 {{#extends 'base'}}
 
 {{#block "content"}}
-<div class="m-3">
+<h3>Updating Wine Category:</h3>
+<form method="POST">
 
-    <h3>Updating wine category: {{category.name}} </h3>
-    <form method="POST">
-       
     {{{form}}}
 
-    <input type="submit" class="btn btn-primary mt-3" />
+    <input type="submit" class="btn btn-secondary mt-3" />
 </form>
-
-</div>
-
-
 {{/block}}
 
 {{/extends}}

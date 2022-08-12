@@ -1,34 +1,29 @@
 {{#extends 'base'}}
 
 {{#block "content"}}
-
 <h1>Country</h1>
-	<a role="button" class="btn btn-primary" href="/product-information/country/create">Add New Country</a>
-
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Action</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			{{#each country}}
-			<tr>
-				<td>{{this.id}}</td>
-				<td>{{this.name}}</td>
-				<td>
-					<a class="btn btn-primary btn-sm" href="/product-information/country/{{this.id}}/update">Update</a>
-					<a class="btn btn-danger btn-sm" href="/product-information/country/{{this.id}}/delete">Delete</a>
-				</td>
-			</tr>
-			{{/each}}
-		</tbody>
-	</table>
-
-
+<a role="button" class="btn btn-secondary" href="/product-information/country/create">Add New</a>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each country}}
+		<tr>
+			<td>{{this.id}}</td>
+			<td>{{this.name}}</td>
+			<td>
+				<a class="btn btn-secondary btn-sm" href="/product-information/country/{{this.id}}/update">Update</a>
+				<a class="btn btn-danger btn-sm" href="/product-information/country/{{this.id}}/delete">Delete</a>
+			</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
 {{/block}}
 
 {{/extends}}

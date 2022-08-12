@@ -1,5 +1,28 @@
+/* custom fonts */
+@font-face {
+    font-family: Catamaran;
+    src: url("/public/fonts/catamaran.ttf");
+}
+
+@font-face {
+    font-family: Cinzel;
+    src: url("/public/fonts/cinzel.ttf");
+}
+
 body {
+    font-family: 'Cinzel' !important;
     margin: 0;
+    background-color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Catamaran' !important;
+    color: #b1af6a
 }
 
 *,
@@ -90,11 +113,12 @@ body {
 
 .context {
     display: flex;
-    overflow-x: auto;
+    height: 100vh;
 }
 
 .content {
     margin: 1rem;
+    overflow: scroll;
 }
 
 .sidebar-list {
@@ -152,24 +176,24 @@ body {
 }
 
 .sidebar.open {
-    width: 200px;
+    width: 220px;
 }
 
 .footer {
-    position: fixed;
-    left: 0;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    position: relative;
     bottom: 0;
-    width: 100%;
     background-color: #343130;
-    height: 50px;
-    color: white;
-    text-align: center
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .4);
+    padding: 0 .5rem;
+    height: var(--header-height);
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
     cursor: pointer;
-    padding: 18px;
     width: 100%;
     text-align: left;
     border: none;
@@ -196,3 +220,37 @@ body {
     padding-top: 10px;
     color: #909090;
 }
+
+a.hover_green:hover {
+    color: #b1af6a !important;
+}
+
+#footer {
+    background: #343130 !important;
+}
+
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+/* #footer ul.social li{
+	padding: 3px 0;
+} */
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+
+/* .badge-color {
+    background-color: #b1af6a !important;
+    color: purple !important
+} */

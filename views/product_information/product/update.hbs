@@ -1,25 +1,15 @@
 {{#extends 'base'}}
 
 {{#block "content"}}
-<div class="m-3">
-
-    <h3>Updating wine product: {{product.name}} </h3>
-    <form method="POST">
-
+<h3>Updating wine product:</h3>
+<form method="POST">
     {{{form}}}
-
-    <div>     
-        
+    <div>
         <img src="{{producer.producer_image_url}}" id="uploaded_image" />
-                
     </div>
-    <a href="#" class="btn btn-primary" id="upload_widget">Upload photo</a>
-    <input type="submit" class="btn btn-primary mt-3" />
+    <a href="#" class="btn btn-secondary" id="upload_widget">Upload Image</a>
+    <input type="submit" class="btn btn-secondary" />
 </form>
-
-</div>
-
-
 {{/block}}
 
 {{/extends}}
