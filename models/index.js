@@ -25,7 +25,7 @@ const Size = bookshelf.model('Size', {
 
 const GrapeVarietal = bookshelf.model('GrapeVarietal', {
     tableName:'grape_varietal',
-    products:function(){
+    product:function(){
         return this.belongsToMany('Product')
     }
 });

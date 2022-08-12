@@ -1,0 +1,34 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<h1>Size</h1>
+<a role="button" class="btn btn-primary" href="/product-information/size/create">List New Size</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Volume in ml</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {{#each size}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.volume}}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="/product-information/size/{{this.id}}/update">Update</a>
+                <a class="btn btn-danger btn-sm" href="/product-information/size/{{this.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{/block}}
+
+{{/extends}}

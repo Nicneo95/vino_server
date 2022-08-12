@@ -1,0 +1,25 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<div class="m-3">
+
+    <h3>Updating wine product: {{product.name}} </h3>
+    <form method="POST">
+
+    {{{form}}}
+
+    <div>     
+        
+        <img src="{{producer.producer_image_url}}" id="uploaded_image" />
+                
+    </div>
+    <a href="#" class="btn btn-primary" id="upload_widget">Upload photo</a>
+    <input type="submit" class="btn btn-primary mt-3" />
+</form>
+
+</div>
+
+
+{{/block}}
+
+{{/extends}}

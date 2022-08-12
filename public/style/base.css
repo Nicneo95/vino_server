@@ -90,6 +90,7 @@ body {
 
 .context {
     display: flex;
+    overflow-x: auto;
 }
 
 .content {

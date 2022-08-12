@@ -101,6 +101,31 @@ const grapeVarietalForm = () => {
     })
 }
 
+const sizeForm = () => {
+    return forms.create({
+        name: fields.string({
+            label: 'Bottle Size',
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required("Please enter the name of the size"),
+                validators.maxlength(255, "Please enter a name shorter than 255 characters")
+            ]
+        }),
+        volume: fields.string({
+            label: 'Volume in ml',
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required("Please enter the volume"),
+                validators.integer("Please enter the volume using numbers"),
+                validators.min(0, "Please enter a positive number")
+            ]
+        })
+    })
+}
+
+
 const productForm = (category, country, region, producer, grapeVarietal, size) => {
     return forms.create({
         name: fields.string({
@@ -147,7 +172,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             widget: widgets.multipleSelect(),
             choices: grapeVarietal
         }),
-        sizes: fields.string({
+        size: fields.string({
             label: 'Size',
             required: true,
             errorAfterField: true,
@@ -181,7 +206,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
         alcohol_percentage: fields.string({
             label: 'Alcohol Percentage',
             errorAfterField: true,
-            validators: [ 
+            validators: [
                 validators.maxlength(10, "Exceed input field")
             ]
         }),
@@ -191,7 +216,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             errorAfterField: true,
             validators: [
                 validators.required("Input required"),
-                validators.integer("Invalid input"), 
+                validators.integer("Invalid input"),
                 validators.min(0, "Invalid input")
             ]
         }),
@@ -201,7 +226,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             errorAfterField: true,
             validators: [
                 validators.required("Input required"),
-                validators.integer("Invalid input"), 
+                validators.integer("Invalid input"),
                 validators.min(0, "Invalid input")
             ]
         }),
@@ -211,7 +236,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             errorAfterField: true,
             validators: [
                 validators.required("Input required"),
-                validators.integer("Invalid input"), 
+                validators.integer("Invalid input"),
                 validators.min(0, "Invalid input"),
                 validators.max(9999, "Invalid input")
             ]
@@ -225,4 +250,4 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
     })
 }
 
-module.exports = { bootstrapField, categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm }
+module.exports = { bootstrapField, categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm, sizeForm, productForm, }
