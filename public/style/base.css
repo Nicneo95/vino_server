@@ -116,6 +116,19 @@ h6 {
     height: 100vh;
 }
 
+.loginContext {
+    display: flex;
+    height: 100vh;
+    background-image: url(../images/login_background.jpeg);
+    background-size: cover;
+}
+
+.login {
+    border-radius: 25px;
+    border: solid #b1af6a;
+    background-color: #ffffffdd;
+}
+
 .content {
     margin: 1rem;
     overflow: scroll;
@@ -202,15 +215,18 @@ h6 {
 }
 
 .accordion:after {
-    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    content: '\02795';
+    /* Unicode character for "plus" sign (+) */
     font-size: 13px;
     float: right;
     margin-left: 40px;
-  }
-  
-  .active:after {
-    content: "\2796"; /* Unicode character for "minus" sign (-) */
-  }
+}
+
+.active:after {
+    content: "\2796";
+    /* Unicode character for "minus" sign (-) */
+}
+
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active,
 .accordion:hover {
@@ -245,19 +261,21 @@ a.hover_green:hover {
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
+
 /* #footer ul.social li{
 	padding: 3px 0;
 } */
 #footer ul.social li a i {
     margin-right: 5px;
-	font-size:25px;
-	-webkit-transition: .5s all ease;
-	-moz-transition: .5s all ease;
-	transition: .5s all ease;
+    font-size: 25px;
+    -webkit-transition: .5s all ease;
+    -moz-transition: .5s all ease;
+    transition: .5s all ease;
 }
+
 #footer ul.social li:hover a i {
-	font-size:30px;
-	margin-top:-10px;
+    font-size: 30px;
+    margin-top: -10px;
 }
 
 /* .badge-color {
