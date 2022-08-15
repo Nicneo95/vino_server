@@ -55,19 +55,7 @@ h6 {
 }
 
 .logo {
-    position: absolute-center;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    align-content: center;
     height: 25px;
-}
-
-.header a.split {
-    position: absolute;
-    right: 25px;
-    color: red;
 }
 
 .menu-icon-btn {

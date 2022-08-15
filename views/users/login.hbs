@@ -11,7 +11,7 @@
     {{!-- nav --}}
     <header class="header">
         <div class="split"></div>
-        <img class="logo" src="/images/logo_header.png" alt="vino logo">
+        <img class="logo position-absolute top-50 start-50 translate-middle" src="/images/logo_header.png" alt="vino logo">
     </header>
     {{!-- content of body --}}
     <div class="loginContext">
@@ -19,6 +19,7 @@
             <h1>Admin login</h1>
             <p>Please login to access this website</p>
             <form method="POST">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                 {{{form}}}
                 <input type="submit" class="btn btn-secondary mt-3" value="Login" />
             </form>

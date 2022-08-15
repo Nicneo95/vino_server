@@ -3,6 +3,7 @@
 {{#block "content"}}
 <h3>Add a New Region</h3>
 <form method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
     {{{form}}}
     <input type="submit" class="btn btn-secondary mt-3" />
 </form>

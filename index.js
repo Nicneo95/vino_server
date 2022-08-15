@@ -5,6 +5,8 @@ const cors = require("cors");
 const session = require('express-session');
 const flash = require('connect-flash');
 const FileStore = require('session-file-store')(session);
+const csrf = require('csurf')
+const { checkIfAuthorised } = require('./middlewares');
 require("dotenv").config();
 
 // create an instance of express app
@@ -38,6 +40,24 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// enable CSRF
+app.use(csrf());
+
+// Share CSRF with hbs files
+app.use(function(req,res,next){
+  res.locals.csrfToken = req.csrfToken();
+  next()
+});
+
+app.use(function (err, req, res, next) {
+  if (err && err.code == "EBADCSRFTOKEN") {
+      req.flash('error_messages', 'The form has expired. Please try again');
+      res.redirect('back');
+  } else {
+      next()
+  }
+});
+
 app.use(flash())
 
 // Register Flash middleware
@@ -47,6 +67,12 @@ app.use(function (req, res, next) {
     next()
   });
 
+// Share the user data with hbs files
+app.use(function(req,res,next){
+  res.locals.user = req.session.user;
+  next();
+})
+
 // import in routes
 const landingRoutes = require('./routes/landing');
 const productRoutes = require('./routes/products');
@@ -54,7 +80,7 @@ const userRoutes = require('./routes/users');
 
 async function main() {
     app.use('/', landingRoutes);
-    app.use('/product-information', productRoutes);
+    app.use('/product-information', checkIfAuthorised, productRoutes);
     app.use('/user', userRoutes);
 }
 
