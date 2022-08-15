@@ -252,6 +252,11 @@ create-error@~0.3.1:
   resolved "https://registry.yarnpkg.com/create-error/-/create-error-0.3.1.tgz#69810245a629e654432bf04377360003a5351a23"
   integrity sha512-n/Q4aSCtYuuDneEW5Q+nd0IIZwbwmX/oF6wKcDUhXGJNwhmp2WHEoWKz7X+/H7rBtjimInW7f0ceouxU0SmuzQ==
 
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
+
 cycle@1.0.x:
   version "1.0.3"
   resolved "https://registry.npmjs.org/cycle/-/cycle-1.0.3.tgz"

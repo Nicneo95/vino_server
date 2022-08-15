@@ -52,4 +52,15 @@ const Product = bookshelf.model('Product', {
     }
 });
 
-module.exports = { Product, Category, Country, Region, Producer, Size, GrapeVarietal };
+const User = bookshelf.model('User',{
+    tableName: 'user',
+    user_type() {
+        return this.belongsTo('UserType')
+    }
+})
+
+const UserType = bookshelf.model('UserType',{
+    tableName: 'user_type'
+})
+
+module.exports = { Product, Category, Country, Region, Producer, Size, GrapeVarietal, User, UserType };

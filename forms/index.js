@@ -158,7 +158,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             choices: region
         }),
         country_id: fields.string({
-            label: 'Origin Country',
+            label: 'Country',
             required: true,
             errorAfterField: true,
             widget: widgets.select(),
@@ -249,4 +249,59 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
     })
 }
 
-module.exports = { bootstrapField, categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm, sizeForm, productForm, }
+const registrationForm = () => {
+    return forms.create({
+        'first_name': fields.string({
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required('Input required'),
+                validators.maxlength(255, "Exceed input field")
+            ]         
+        }),
+        'last_name': fields.string({
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required('Input required'),
+                validators.maxlength(255, "Exceed input field")
+            ]       
+        }),
+        'email': fields.email({
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required('Input required'),
+                validators.maxlength(320, "Exceed input field")
+            ]          
+        }),
+        'password': fields.password({
+            required: true,
+            errorAfterField: true   
+        }),
+        'confirm_password': fields.password({
+            required: true,
+            errorAfterField: true,
+            validators: [validators.matchField('password')]
+        })
+    })
+}
+
+const loginForm = () => {
+    return forms.create({
+        'email': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            validators: [
+                validators.required('Input required'),
+                validators.maxlength(320, "Exceed input field")
+            ]
+        }),
+        'password': fields.password({
+            'required': true,
+            'errorAfterField': true
+        })
+    })
+}
+
+module.exports = { bootstrapField, categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm, sizeForm, productForm, registrationForm, loginForm}
