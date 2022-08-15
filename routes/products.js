@@ -38,6 +38,8 @@ router.post('/category/create', async (req, res) => {
 
             await category.save()
 
+            req.flash("success_messages", `New category ${category.get('name')} has been created`)
+
             res.redirect('/product-information/category');
         },
         'error': async (form) => {
@@ -77,6 +79,8 @@ router.post('/category/:category_id/update', async function (req, res) {
 
             category.set(formData);
             await category.save();
+
+            req.flash("success_messages", `Category ${category.get('name')} has been updated`)
 
             res.redirect('/product-information/category');
         },
@@ -137,6 +141,8 @@ router.post('/country/create', async (req, res) => {
 
             await country.save()
 
+            req.flash("success_messages", `New country ${country.get('name')} has been created`)
+
             res.redirect('/product-information/country');
         },
         'error': async (form) => {
@@ -177,6 +183,8 @@ router.post('/country/:country_id/update', async function (req, res) {
 
             country.set(formData);
             await country.save();
+
+            req.flash("success_messages", `Country ${country.get('name')} has been updated`)
 
             res.redirect('/product-information/country');
         },
@@ -237,6 +245,8 @@ router.post('/producer/create', async (req, res) => {
 
             await producer.save()
 
+            req.flash("success_messages", `New producer ${producer.get('name')} has been created`)
+
             res.redirect('/product-information/producer');
         },
         'error': async (form) => {
@@ -279,6 +289,8 @@ router.post('/producer/:producer_id/update', async function (req, res) {
 
             producer.set(formData);
             await producer.save();
+
+            req.flash("success_messages", `Producer ${producer.get('name')} has been updated`)
 
             res.redirect('/product-information/producer');
         },
@@ -337,9 +349,11 @@ router.post('/region/create', async (req, res) => {
         'success': async (form) => {
             let { ...formData } = form.data
 
-            const category = new Region(formData);
+            const region = new Region(formData);
 
-            await category.save()
+            await region.save()
+
+            req.flash("success_messages", `New region ${region.get('name')} has been created`)
 
             res.redirect('/product-information/region');
         },
@@ -380,6 +394,8 @@ router.post('/region/:region_id/update', async function (req, res) {
 
             region.set(formData);
             await region.save();
+
+            req.flash("success_messages", `Region ${region.get('name')} has been updated`)
 
             res.redirect('/product-information/region');
         },
@@ -441,6 +457,8 @@ router.post('/grape-varietal/create', async (req, res) => {
 
             await grapeVarietal.save()
 
+            req.flash("success_messages", `New grape varietal ${grapeVarietal.get('name')} has been created`)
+
             res.redirect('/product-information/grape-varietal');
         },
         'error': async (form) => {
@@ -482,6 +500,8 @@ router.post('/grape-varietal/:grape_varietal_id/update', async function (req, re
 
             grapeVarietal.set(formData);
             await grapeVarietal.save();
+
+            req.flash("success_messages", `Grape varietal ${grapeVarietal.get('name')} has been updated`)
 
             res.redirect('/product-information/grape-varietal');
         },
@@ -544,6 +564,8 @@ router.post('/size/create', async (req, res) => {
 
             await size.save()
 
+            req.flash("success_messages", `New bottle size ${size.get('name')} has been created`)
+
             res.redirect('/product-information/size');
         },
         'error': async (form) => {
@@ -586,6 +608,8 @@ router.post('/size/:size_id/update', async function (req, res) {
 
             size.set(formData);
             await size.save();
+
+            req.flash("success_messages", `Bottle size ${size.get('name')} has been updated`)
 
             res.redirect('/product-information/size');
         },
@@ -670,7 +694,7 @@ router.get('/product/create', async function (req, res) {
     })
 })
 // product create route 
-router.post('/product/create', async function (req,res) {
+router.post('/product/create', async function (req, res) {
     const allCategories = await Category.fetchAll().map(category => {
         return [category.get('id'), category.get('name')]
     });
@@ -720,6 +744,8 @@ router.post('/product/create', async function (req,res) {
                 await product.grape_varietal().attach(grape_varietal.split(','))
             }
 
+            req.flash("success_messages", `New product ${product.get('name')} has been created`)
+
             res.redirect('/product-information/product');
         },
         'error': async (form) => {
@@ -741,8 +767,8 @@ router.get('/product/:product_id/update', async function (req, res) {
             'country',
             'region',
             'producer',
+            'size',
             'grape_varietal',
-            'size'
         ]
     });
 
@@ -771,8 +797,8 @@ router.get('/product/:product_id/update', async function (req, res) {
         allCountries,
         allRegions,
         allProducers,
-        allGrapeVarieties,
         allSizes,
+        allGrapeVarieties,
     );
 
     form.fields.name.value = product.get('name');
@@ -813,8 +839,8 @@ router.post('/product/:product_id/update', async function (req, res) {
             'country',
             'region',
             'producer',
-            'grape_varietal',
-            'size'
+            'size',
+            'grape_varietal'
         ]
     });
 
@@ -843,8 +869,8 @@ router.post('/product/:product_id/update', async function (req, res) {
         allCountries,
         allRegions,
         allProducers,
-        allGrapeVarieties,
         allSizes,
+        allGrapeVarieties
     );
 
     form.handle(req, {
@@ -869,6 +895,8 @@ router.post('/product/:product_id/update', async function (req, res) {
 
             await product.grape_varietal().detach(toRemoveGrapeVarietals);
             await product.grape_varietal().attach(selectedGrapeVarietalsIds)
+
+            req.flash("success_messages", `Product ${product.get('name')} has been updated`)
 
             res.redirect('/product-information/product');
         },
@@ -914,7 +942,7 @@ router.post('/product/:product_id/delete', async function (req, res) {
         ]
     });
     await product.destroy();
-    res.redirect('/product-information/product') 
+    res.redirect('/product-information/product')
 })
 
 module.exports = router;

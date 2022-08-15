@@ -1,55 +1,55 @@
 const bookshelf = require('../bookshelf')
 
 const Category = bookshelf.model('Category', {
-    tableName:'category'
+    tableName: 'category'
 });
 
 const Country = bookshelf.model('Country', {
-    tableName:'country'
+    tableName: 'country'
 });
 
 const Region = bookshelf.model('Region', {
-    tableName:'region'
+    tableName: 'region'
 });
 
 const Producer = bookshelf.model('Producer', {
-    tableName:'producer'
+    tableName: 'producer'
 });
 
 const Size = bookshelf.model('Size', {
-    tableName:'size',
-    products:function(){
+    tableName: 'size',
+    products: function () {
         return this.belongsToMany('Product')
     }
 });
 
 const GrapeVarietal = bookshelf.model('GrapeVarietal', {
-    tableName:'grape_varietal',
-    product:function(){
+    tableName: 'grape_varietal',
+    product: function () {
         return this.belongsToMany('Product')
     }
 });
 
 const Product = bookshelf.model('Product', {
-    tableName:'product',
-    category: function() {
+    tableName: 'product',
+    category: function () {
         return this.belongsTo('Category')
     },
-    country : function() {
+    country: function () {
         return this.belongsTo('Country')
     },
-    region: function() {
+    region: function () {
         return this.belongsTo('Region')
     },
-    producer: function() {
+    producer: function () {
         return this.belongsTo('Producer')
     },
-    grape_varietal: function() {
-        return this.belongsToMany('GrapeVarietal');
-    },
-    size: function() {
+    size: function () {
         return this.belongsToMany('Size');
     },
+    grape_varietal: function () {
+        return this.belongsToMany('GrapeVarietal');
+    }
 });
 
 module.exports = { Product, Category, Country, Region, Producer, Size, GrapeVarietal };

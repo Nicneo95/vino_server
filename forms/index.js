@@ -8,8 +8,8 @@ const widgets = forms.widgets;
 const bootstrapField = function (name, object) {
     if (!Array.isArray(object.widget.classes)) { object.widget.classes = []; }
 
-    if (object.widget.classes.indexOf('form-control') === -1) {
-        object.widget.classes.push('form-control');
+    if (object.widget.classes.indexOf('form-control my-1') === -1) {
+        object.widget.classes.push('form-control my-1');
     }
 
     var validationclass = object.value && !object.error ? 'is-valid' : '';
@@ -22,7 +22,7 @@ const bootstrapField = function (name, object) {
     var error = object.error ? '<div class="invalid-feedback">' + object.error + '</div>' : '';
 
     var widget = object.widget.toHTML(name, object);
-    return '<div class="form-group">' + label + widget + error + '</div>';
+    return '<div class="form-group my-2">' + label + widget + error + '</div>';
 };
 
 const categoryForm = () => {
@@ -125,7 +125,6 @@ const sizeForm = () => {
     })
 }
 
-
 const productForm = (category, country, region, producer, grapeVarietal, size) => {
     return forms.create({
         name: fields.string({
@@ -165,19 +164,19 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             widget: widgets.select(),
             choices: country
         }),
-        grape_varietal: fields.string({
+        size: fields.string({
             label: 'Grape Varietal',
             required: true,
             errorAfterField: true,
             widget: widgets.multipleSelect(),
-            choices: grapeVarietal
+            choices: size
         }),
-        size: fields.string({
+        grape_varietal: fields.string({
             label: 'Size',
             required: true,
             errorAfterField: true,
             widget: widgets.multipleSelect(),
-            choices: size
+            choices: grapeVarietal
         }),
         nose_attribute: fields.string({
             label: 'Description of nose attributes',
@@ -211,7 +210,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             ]
         }),
         price: fields.string({
-            label: 'Price in cents',
+            label: 'Price in Dollar',
             required: true,
             errorAfterField: true,
             validators: [
