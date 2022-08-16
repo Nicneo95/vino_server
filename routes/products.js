@@ -680,8 +680,8 @@ router.get('/product', async function (req, res) {
                 q.where('category_id', '=', form.data.category_id)
             }
 
-            if (form.data.origin_country_id) {
-                q.where('country_id', '=', form.data.origin_country_id)
+            if (form.data.country_id) {
+                q.where('country_id', '=', form.data.country_id)
             }
 
             if (form.data.region_id) {
@@ -777,10 +777,14 @@ router.get('/product/create', async function (req, res) {
         allSizes,
         allGrapeVarieties
     );
-
+    
     res.render('product_information/product/create', {
-        form: form.toHTML(bootstrapField)
+        form: form.toHTML(bootstrapField),
+        cloudinaryName: process.env.CLOUDINARY_NAME,
+        cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+        cloudinaryPreset: process.env.CLOUDINARY_UPLOAD_PRESET
     })
+
 })
 // product create route 
 router.post('/product/create', async function (req, res) {
@@ -812,13 +816,6 @@ router.post('/product/create', async function (req, res) {
         allGrapeVarieties
     );
 
-    res.render('product_related/product/create', {
-        'form': form.toHTML(bootstrapField),
-        'cloudinaryName': process.env.CLOUDINARY_NAME,
-        'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
-        'cloudinaryPreset': process.env.CLOUDINARY_UPLOAD_PRESET
-    });
-
     form.handle(req, {
         'success': async (form) => {
 
@@ -846,7 +843,10 @@ router.post('/product/create', async function (req, res) {
         },
         'error': async (form) => {
             res.render('product_information/product/create', {
-                'form': form.toHTML(bootstrapField)
+                form: form.toHTML(bootstrapField),
+                cloudinaryName: process.env.CLOUDINARY_NAME,
+                cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+                cloudinaryPreset: process.env.CLOUDINARY_UPLOAD_PRESET
             })
         }
 
@@ -920,11 +920,11 @@ router.get('/product/:product_id/update', async function (req, res) {
 
 
     res.render('product_information/product/update', {
-        'form': form.toHTML(bootstrapField),
-        'product': product.toJSON(),
-        'cloudinaryName': process.env.CLOUDINARY_NAME,
-        'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
-        'cloudinaryPreset': process.env.CLOUDINARY_UPLOAD_PRESET
+        form: form.toHTML(bootstrapField),
+        product: product.toJSON(),
+        cloudinaryName: process.env.CLOUDINARY_NAME,
+        cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+        cloudinaryPreset: process.env.CLOUDINARY_UPLOAD_PRESET
     })
 })
 // product update route 
@@ -1002,10 +1002,10 @@ router.post('/product/:product_id/update', async function (req, res) {
         },
         'error': async (form) => {
             res.render('product_information/product/update', {
-                'form': form.toHTML(bootstrapField),
-                'cloudinaryName': process.env.CLOUDINARY_NAME,
-                'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
-                'cloudinaryPreset': process.env.CLOUDINARY_UPLOAD_PRESET
+                form: form.toHTML(bootstrapField),
+                cloudinaryName: process.env.CLOUDINARY_NAME,
+                cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+                cloudinaryPreset: process.env.CLOUDINARY_UPLOAD_PRESET
             })
         }
     })

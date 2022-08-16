@@ -206,7 +206,7 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             label: 'Alcohol Percentage',
             errorAfterField: true,
             validators: [
-                validators.maxlength(10, "Exceed input field")
+                validators.integer("Invalid input")
             ]
         }),
         price: fields.string({

@@ -272,6 +272,26 @@ a.hover_green:hover {
     width: 500px;
     display: flex
 }
+
+.table {
+    text-align: center;
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+    text-align: center !important;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #ffffff;
+    background-color: #b1af6a !important;
+    border-color: #b1af6a !important;
+}
+
+.page-link {
+    color: #212529 !important;
+}
+
 /* .badge-color {
     background-color: #b1af6a !important;
     color: purple !important

@@ -7,9 +7,9 @@
     {{{form}}}
     <div>
         <img src="{{producer.producer_image_url}}" id="uploaded_image" />
+        <a href="#" class="btn btn-secondary my-3" id="upload_widget">Upload Image</a>
+        <input type="submit" class="btn btn-secondary" />
     </div>
-    <a href="#" class="btn btn-secondary" id="upload_widget">Upload Image</a>
-    <input type="submit" class="btn btn-secondary" />
 </form>
 {{/block}}
 
@@ -44,6 +44,9 @@
             document.querySelector('#id_image_url').value = result.info.url;
             document.querySelector("#uploaded_image").src = result.info.url;
             document.querySelector("#uploaded_image").style.display = 'inline';
+            document.querySelector("#uploaded_image").style.height = '300px';
+            document.querySelector("#uploaded_image").style.width = '300px';
+            document.querySelector("#uploaded_image").style.objectFit = 'cover';
         }
     })
     document.querySelector("#upload_widget").addEventListener('click', function () {

@@ -6,8 +6,8 @@
     <input type="hidden" name="_csrf" value="{{csrfToken}}" />
     {{{form}}}
     <div>
-        <a href="#" class="btn btn-secondary my-3" id="upload_widget">Upload Image</a>
         <img src="" style="display:none" id="uploaded_product_image" />
+        <a href="#" class="btn btn-secondary my-3" id="upload_widget">Upload Image</a>
         <input type="submit" class="btn btn-secondary" />
     </div>
 </form>
@@ -47,6 +47,10 @@
             document.querySelector('#id_image_url').value = result.info.url;
             document.querySelector("#uploaded_product_image").src = result.info.url;
             document.querySelector("#uploaded_product_image").style.display = 'inline';
+            document.querySelector("#uploaded_product_image").style.height = '300px';
+            document.querySelector("#uploaded_product_image").style.width = '300px';
+            document.querySelector("#uploaded_product_image").style.objectFit = 'cover';
+
         }
     })
     {{!-- add event listener to initalise the widget --}}

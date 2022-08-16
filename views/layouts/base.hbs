@@ -6,114 +6,116 @@
   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/style/base.css">
-
-<body>
-  {{!-- nav --}}
-  <header class="header">
-    <button class="menu-icon-btn" data-menu-icon-btn>
-      <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="menu-icon">
-        <g>
-          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-        </g>
-      </svg>
-    </button>
-    <img class="logo position-absolute top-50 start-50 translate-middle" src="/images/logo_header.png" alt="vino logo">
-    <div class="position-absolute top-50 end-0 translate-middle-y" style="margin-right: 25px;">
-      Hi, {{{user.first_name}}}
-      <a href="/user/logout" class="btn btn-sm btn-secondary">Logout</a>
-    </div>
-  </header>
-  {{!-- content of body --}}
-  <div class="context">
-    <div class="sidebar" data-sidebar>
-      <div class="middle-sidebar">
-        <ul class="sidebar-list">
-          <li class="sidebar-list-item">
-            <a href="#" class="sidebar-link hover_green">
-              <img class="icon" src="/images/shipment_icon.png" alt="shipment icon">
-              <div class="hidden-sidebar">Shipment</div>
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="#" class="sidebar-link hover_green">
-              <img class="icon" src="/images/order_icon.png" alt="order icon">
-              <div class="hidden-sidebar">Order</div>
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="#" class="sidebar-link accordion hover_green"
-              style="padding-top: 8px; padding-bottom: 8px; padding-left: 20px; padding-right; 0px;">
-              <img class="icon" src="/images/product_icon.png" alt="product icon">
-              <div class="hidden-sidebar">Product</div>
-            </a>
-            <div class="panel">
-              <ul>
-                <li>
-                  <a class="productTags hover_green" href="/product-information/category"> Category </a>
-                </li>
-                <li>
-                  <a class="productTags hover_green" href="/product-information/size"> Bottle Size </a>
-                </li>
-                <li>
-                  <a class="productTags hover_green" href="/product-information/country"> Country </a>
-                </li>
-                <li>
-                  <a class="productTags hover_green" href="/product-information/region"> Region </a>
-                </li>
-                <li>
-                  <a class="productTags hover_green" href="/product-information/grape-varietal"> Grape Varietal </a>
-                </li>
-                <li>
-                  <a class="productTags hover_green" href="/product-information/producer"> Producer </a>
-                </li>
-                <li>
-                  <a class="productTags hover_green" href="/product-information/product"> Product </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="content container-fluid">
-      {{#block "content"}}{{/block}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" <body>
+{{!-- nav --}}
+<header class="header">
+  <button class="menu-icon-btn" data-menu-icon-btn>
+    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="menu-icon">
+      <g>
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+      </g>
+    </svg>
+  </button>
+  <img class="logo position-absolute top-50 start-50 translate-middle" src="/images/logo_header.png" alt="vino logo">
+  <div class="position-absolute top-50 end-0 translate-middle-y" style="margin-right: 25px;">
+    Hi, {{{user.first_name}}}
+    <a href="/user/logout" class="btn btn-sm btn-secondary">Logout</a>
+  </div>
+</header>
+{{!-- content of body --}}
+<div class="context">
+  <div class="sidebar" data-sidebar>
+    <div class="middle-sidebar">
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item">
+          <a href="#" class="sidebar-link hover_green">
+            <img class="icon" src="/images/shipment_icon.png" alt="shipment icon">
+            <div class="hidden-sidebar">Shipment</div>
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" class="sidebar-link hover_green">
+            <img class="icon" src="/images/order_icon.png" alt="order icon">
+            <div class="hidden-sidebar">Order</div>
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" class="sidebar-link accordion hover_green"
+            style="padding-top: 8px; padding-bottom: 8px; padding-left: 20px; padding-right; 0px;">
+            <img class="icon" src="/images/product_icon.png" alt="product icon">
+            <div class="hidden-sidebar">Product</div>
+          </a>
+          <div class="panel">
+            <ul>
+              <li>
+                <a class="productTags hover_green" href="/product-information/category"> Category </a>
+              </li>
+              <li>
+                <a class="productTags hover_green" href="/product-information/size"> Bottle Size </a>
+              </li>
+              <li>
+                <a class="productTags hover_green" href="/product-information/country"> Country </a>
+              </li>
+              <li>
+                <a class="productTags hover_green" href="/product-information/region"> Region </a>
+              </li>
+              <li>
+                <a class="productTags hover_green" href="/product-information/grape-varietal"> Grape Varietal </a>
+              </li>
+              <li>
+                <a class="productTags hover_green" href="/product-information/producer"> Producer </a>
+              </li>
+              <li>
+                <a class="productTags hover_green" href="/product-information/product"> Product </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-  {{!-- footer --}}
-  <section id="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-          <ul class="list-unstyled list-inline social text-center">
-            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i
-                  class="fa fa-facebook"></i></a></li>
-            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i
-                  class="fa fa-instagram"></i></a></li>
-            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i
-                  class="fa fa-google-plus"></i></a></li>
-            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02" target="_blank"><i
-                  class="fa fa-envelope"></i></a></li>
-          </ul>
-        </div>
-        <hr>
+  <div class="content container-fluid">
+    {{#block "content"}}{{/block}}
+  </div>
+</div>
+{{!-- footer --}}
+<section id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+        <ul class="list-unstyled list-inline social text-center">
+          <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-instagram"></i></a>
+          </li>
+          <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i
+                class="fa fa-google-plus"></i></a></li>
+          <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02" target="_blank"><i
+                class="fa fa-envelope"></i></a></li>
+        </ul>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-          <p>For educational purpose only</p>
-          <p class="h6">© All right Reversed Vino.</p>
-        </div>
-        <hr>
-      </div>
+      <hr>
     </div>
-  </section>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+        <p>For educational purpose only</p>
+        <p class="h6">© All right Reversed Vino.</p>
+      </div>
+      <hr>
+    </div>
+  </div>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-  <script src="/functionality/base.js"></script>
-  {{#block 'js'}}{{/block}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="/functionality/base.js"></script>
+{{#block 'js'}}{{/block}}
 </body>
 
 </html>
