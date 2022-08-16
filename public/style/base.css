@@ -266,6 +266,12 @@ a.hover_green:hover {
     margin-top: -10px;
 }
 
+.search {
+    border: solid red;
+    max-height: 100px;
+    width: 500px;
+    display: flex
+}
 /* .badge-color {
     background-color: #b1af6a !important;
     color: purple !important

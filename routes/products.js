@@ -1,14 +1,10 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
+const productDAL = require('../dal/products');
 
 const { Category, Country, Producer, Region, GrapeVarietal, Size, Product } = require('../models');
 
-const { categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm, sizeForm, productForm, bootstrapField } = require('../forms');
-
-// test product-information route 
-router.get('/', async function (req, res) {
-    res.render('product_information/index')
-});
+const { categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm, sizeForm, productForm, searchProductForm, bootstrapField } = require('../forms');
 
 // category CRUD route
 // category index route 
@@ -645,18 +641,111 @@ router.post('/size/:size_id/delete', async function (req, res) {
 // product CRUD route 
 // product index route 
 router.get('/product', async function (req, res) {
-    let product = await Product.collection().fetch({
-        withRelated: [
-            'category',
-            'country',
-            'region',
-            'producer',
-            'grape_varietal',
-            'size'
-        ]
-    })
-    res.render('product_information/product/index', {
-        product: product.toJSON(),
+    const allCategories = await productDAL.getAllCategories()
+    allCategories.unshift(["", "All"])
+    const allCountries = await productDAL.getAllCountries()
+    allCountries.unshift(["", "All"])
+    const allRegions = await productDAL.getAllRegions()
+    allRegions.unshift(["", "All"])
+    const allProducers = await productDAL.getAllProducers()
+    allProducers.unshift(["", "All"])
+    const allGrapeVarietals = await productDAL.getAllGrapeVarietals()
+
+    const searchForm = searchProductForm(allCategories, allCountries, allRegions, allProducers, allGrapeVarietals);
+
+    let q = Product.collection();
+
+    searchForm.handle(req, {
+        // if success show search field
+        'success': async function (form) {
+
+            if (form.data.search_input) {
+                q = q.query(qb => {
+                        qb.where('name', 'like', '%' + form.data.search_input + '%')
+                        .orWhere('description', 'like', '%' + form.data.search_input + '%')
+                        .orWhere('nose_attribute', 'like', '%' + form.data.search_input + '%')
+                        .orWhere('mouth_attribute', 'like', '%' + form.data.search_input + '%')
+                    })
+            }
+
+            if (form.data.min_cost) {
+                q.where('price', '>=', form.data.min_cost);
+            }
+
+            if (form.data.max_cost) {
+                q.where('price', '<=', form.data.max_cost);
+            }
+
+            if (form.data.category_id) {
+                q.where('category_id', '=', form.data.category_id)
+            }
+
+            if (form.data.origin_country_id) {
+                q.where('country_id', '=', form.data.origin_country_id)
+            }
+
+            if (form.data.region_id) {
+                q.where('region_id', '=', form.data.region_id)
+            }
+
+            if (form.data.producer_id) {
+                q.where('producer_id', '=', form.data.producer_id)
+            }
+
+            if (form.data.grape_varietal) {
+                q.query('join', 'grape_varietal_product', 'product.id', 'product_id')
+                    .where('grape_varietal_id', 'in', form.data.grape_varietal.split(','))
+            }
+
+            let product = await q.fetch({
+                withRelated: [
+                    'category',
+                    'country',
+                    'region',
+                    'producer',
+                    'grape_varietal',
+                    'size'
+                ]
+            })
+            res.render('product_information/product/index', {
+                product: product.toJSON(),
+                searchForm: form.toHTML(bootstrapField)
+            })
+        },
+        // situation if error show all 
+        'error': async function (form) {
+            let product = await q.fetch({
+                withRelated: [
+                    'category',
+                    'country',
+                    'region',
+                    'producer',
+                    'grape_varietal',
+                    'size'
+                ]
+            })
+            res.render('product_information/product/index', {
+                product: product.toJSON(),
+                searchForm: form.toHTML(bootstrapField)
+            })
+        },
+        // situation if empty show all
+        'empty' : async function(form){
+            let product = await q.fetch({
+                withRelated: [
+                    'category',
+                    'country',
+                    'region',
+                    'producer',
+                    'grape_varietal',
+                    'size'
+                ]
+            })
+            res.render('product_information/product/index', {
+                product: product.toJSON(),
+                searchForm: form.toHTML(bootstrapField)
+            })
+        }
     })
 })
 // product create route 
@@ -723,6 +812,13 @@ router.post('/product/create', async function (req, res) {
         allGrapeVarieties
     );
 
+    res.render('product_related/product/create', {
+        'form': form.toHTML(bootstrapField),
+        'cloudinaryName': process.env.CLOUDINARY_NAME,
+        'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
+        'cloudinaryPreset': process.env.CLOUDINARY_UPLOAD_PRESET
+    });
+
     form.handle(req, {
         'success': async (form) => {
 
@@ -753,8 +849,9 @@ router.post('/product/create', async function (req, res) {
                 'form': form.toHTML(bootstrapField)
             })
         }
+
     })
-})
+});
 // product update route 
 router.get('/product/:product_id/update', async function (req, res) {
 
@@ -825,6 +922,9 @@ router.get('/product/:product_id/update', async function (req, res) {
     res.render('product_information/product/update', {
         'form': form.toHTML(bootstrapField),
         'product': product.toJSON(),
+        'cloudinaryName': process.env.CLOUDINARY_NAME,
+        'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
+        'cloudinaryPreset': process.env.CLOUDINARY_UPLOAD_PRESET
     })
 })
 // product update route 
@@ -903,6 +1003,9 @@ router.post('/product/:product_id/update', async function (req, res) {
         'error': async (form) => {
             res.render('product_information/product/update', {
                 'form': form.toHTML(bootstrapField),
+                'cloudinaryName': process.env.CLOUDINARY_NAME,
+                'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
+                'cloudinaryPreset': process.env.CLOUDINARY_UPLOAD_PRESET
             })
         }
     })

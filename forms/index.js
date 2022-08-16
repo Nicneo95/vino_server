@@ -304,4 +304,70 @@ const loginForm = () => {
     })
 }
 
-module.exports = { bootstrapField, categoryForm, countryForm, producerForm, regionForm, grapeVarietalForm, sizeForm, productForm, registrationForm, loginForm}
+const searchProductForm = function (category, country, region, producer, grapeVarietal) {
+    return forms.create({
+        'search_input': fields.string({
+            label: 'Search Input',
+            required: false,
+            errorAfterField: true
+        }),
+        'min_cost': fields.string({
+            required: false,
+            errorAfterField: true,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+        'max_cost': fields.string({
+            required: false,
+            errorAfterField: true,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+        'category_id': fields.string({
+            label: 'Category',
+            required: false,
+            errorAfterField: true,
+            widget: widgets.select(),
+            choices: category
+        }),
+        'country_id': fields.string({
+            label: 'Country',
+            required: false,
+            errorAfterField: true,
+            widget: widgets.select(),
+            choices: country
+        }),
+        'region_id': fields.string({
+            label: 'Region',
+            required: false,
+            errorAfterField: true,
+            widget: widgets.select(),
+            choices: region
+        }),
+        'producer_id': fields.string({
+            label: 'Producer',
+            required: false,
+            errorAfterField: true,
+            widget: widgets.select(),
+            choices: producer
+        }),
+        'grape_varietal': fields.string({
+            required: false,
+            errorAfterField: true,
+            widget: widgets.multipleSelect(),
+            choices: grapeVarietal
+        })
+    })
+}
+
+module.exports = { 
+    bootstrapField, 
+    categoryForm, 
+    countryForm, 
+    producerForm, 
+    regionForm, 
+    grapeVarietalForm, 
+    sizeForm, 
+    productForm, 
+    registrationForm, 
+    loginForm,
+    searchProductForm,
+}
