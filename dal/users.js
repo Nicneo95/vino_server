@@ -9,6 +9,18 @@ async function getUserByEmail(email) {
     return user
 }
 
+async function getUserTypeById(userTypeId) {
+    return await User.where({
+        'id': userTypeId
+    }).fetch({
+        require: true,
+        withRelated: [
+            'user_type',
+        ]
+    })
+};
+
 module.exports = {
-    getUserByEmail
+    getUserByEmail,
+    getUserTypeById,
 }

@@ -18,7 +18,7 @@ const Producer = bookshelf.model('Producer', {
 
 const Size = bookshelf.model('Size', {
     tableName: 'size',
-    products: function () {
+    product: function () {
         return this.belongsToMany('Product')
     }
 });
@@ -54,13 +54,16 @@ const Product = bookshelf.model('Product', {
 
 const User = bookshelf.model('User',{
     tableName: 'user',
-    user_type() {
+    user_type: function () {
         return this.belongsTo('UserType')
     }
 })
 
 const UserType = bookshelf.model('UserType',{
-    tableName: 'user_type'
+    tableName: 'user_type',
+    user: function () {
+        return this.hasMany('User')
+    }
 })
 
 module.exports = { Product, Category, Country, Region, Producer, Size, GrapeVarietal, User, UserType };

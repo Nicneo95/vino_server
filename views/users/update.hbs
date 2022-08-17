@@ -1,0 +1,12 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<h3>Updating User:</h3>
+<form method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+    {{{form}}}
+    <input type="submit" class="btn btn-secondary mt-3" />
+</form>
+{{/block}}
+
+{{/extends}}

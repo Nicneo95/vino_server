@@ -20,7 +20,7 @@
   <img class="logo position-absolute top-50 start-50 translate-middle" src="/images/logo_header.png" alt="vino logo">
   <div class="position-absolute top-50 end-0 translate-middle-y" style="margin-right: 25px;">
     Hi, {{{user.first_name}}}
-    <a href="/user/logout" class="btn btn-sm btn-secondary">Logout</a>
+    <a href="/logout" class="btn btn-sm btn-secondary">Logout</a>
   </div>
 </header>
 {{!-- content of body --}}
@@ -68,6 +68,20 @@
               </li>
               <li>
                 <a class="productTags hover_green" href="/product-information/product"> Product </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" class="sidebar-link accordion hover_green"
+            style="padding-top: 8px; padding-bottom: 8px; padding-left: 20px; padding-right; 0px;">
+            <img class="icon" src="/images/setting_icon.png" alt="product icon">
+            <div class="hidden-sidebar" style="padding-right: 9px;">Setting</div>
+          </a>
+          <div class="panel">
+            <ul>
+              <li>
+                <a class="productTags hover_green" href="/user"> User </a>
               </li>
             </ul>
           </div>

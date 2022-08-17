@@ -82,7 +82,7 @@ const cloudinaryRoutes = require('./routes/cloudinary');
 async function main() {
     app.use('/', landingRoutes);
     app.use('/product-information', checkIfAuthorised, productRoutes);
-    app.use('/user', userRoutes);
+    app.use('/', userRoutes);
     app.use('/cloudinary', cloudinaryRoutes)
 }
 

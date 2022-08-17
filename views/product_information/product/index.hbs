@@ -22,60 +22,60 @@
     </div>
 </div> --}}
 <div class="tableHolder mt-3">
-<table class="table display" id="example">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
+    <table class="table display" id="example">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
 
-            <th>Country</th>
-            <th>Region</th>
-            <th>Category</th>
-            <th>Producer</th>
-            <th>Size</th>
-            <th>Grape Varietal</th>
+                <th>Country</th>
+                <th>Region</th>
+                <th>Category</th>
+                <th>Producer</th>
+                <th>Size</th>
+                <th>Grape Varietal</th>
 
-            <th>Price</th>
-            <th>Vintage</th>
-            <th>Stock</th>
-            <th>Image</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each product}}
-        <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.name}}</td>
+                <th>Price</th>
+                <th>Vintage</th>
+                <th>Stock</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each product}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.name}}</td>
 
-            <td>{{this.country.name}}</td>
-            <td>{{this.region.name}}</td>
-            <td>{{this.category.name}}</td>
-            <td>{{this.producer.name}}</td>
-            <td>
-                {{#each this.size}}
-                <span class="badge bg-info">{{this.name}}</span>
-                {{/each}}
-            </td>
-            <td>
-                {{#each this.grape_varietal}}
-                <span class="badge bg-info">{{this.name}}</span>
-                {{/each}}
-            </td>
+                <td>{{this.country.name}}</td>
+                <td>{{this.region.name}}</td>
+                <td>{{this.category.name}}</td>
+                <td>{{this.producer.name}}</td>
+                <td>
+                    {{#each this.size}}
+                    <span class="badge bg-info">{{this.name}}</span>
+                    {{/each}}
+                </td>
+                <td>
+                    {{#each this.grape_varietal}}
+                    <span class="badge bg-info">{{this.name}}</span>
+                    {{/each}}
+                </td>
 
-            <td>{{this.price}}</td>
-            <td>{{this.vintage}}</td>
-            <td>{{this.stock}}</td>
-            <td><img src="{{this.image_url}}" class="img-fluid" /></td>
-            <td>
-                <a class="btn btn-secondary btn-sm m-1"
-                    href="/product-information/product/{{this.id}}/update">Update</a>
-                <a class="btn btn-danger btn-sm m-1" href="/product-information/product/{{this.id}}/delete">Delete</a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+                <td>{{this.price}}</td>
+                <td>{{this.vintage}}</td>
+                <td>{{this.stock}}</td>
+                <td><img src="{{this.image_url}}" class="img-fluid" /></td>
+                <td>
+                    <a class="btn btn-secondary btn-sm m-1"
+                        href="/product-information/product/{{this.id}}/update">Update</a>
+                    <a class="btn btn-danger btn-sm m-1" href="/product-information/product/{{this.id}}/delete">Delete</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
 {{/block}}
 

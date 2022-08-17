@@ -249,9 +249,9 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
     })
 }
 
-const registrationForm = () => {
+const registrationForm = (userType) => {
     return forms.create({
-        'first_name': fields.string({
+        first_name: fields.string({
             required: true,
             errorAfterField: true,
             validators: [
@@ -259,7 +259,7 @@ const registrationForm = () => {
                 validators.maxlength(255, "Exceed input field")
             ]         
         }),
-        'last_name': fields.string({
+        last_name: fields.string({
             required: true,
             errorAfterField: true,
             validators: [
@@ -267,7 +267,7 @@ const registrationForm = () => {
                 validators.maxlength(255, "Exceed input field")
             ]       
         }),
-        'email': fields.email({
+        email: fields.email({
             required: true,
             errorAfterField: true,
             validators: [
@@ -275,15 +275,22 @@ const registrationForm = () => {
                 validators.maxlength(320, "Exceed input field")
             ]          
         }),
-        'password': fields.password({
+        password: fields.password({
             required: true,
             errorAfterField: true   
         }),
-        'confirm_password': fields.password({
+        confirm_password: fields.password({
             required: true,
             errorAfterField: true,
             validators: [validators.matchField('password')]
-        })
+        }),
+        user_type_id: fields.string({
+            label: 'User Type',
+            required: true,
+            errorAfterField: true,
+            widget: widgets.select(),
+            choices: userType
+        }),
     })
 }
 
@@ -304,52 +311,52 @@ const loginForm = () => {
     })
 }
 
-const searchProductForm = function (category, country, region, producer, grapeVarietal) {
+const searchProductForm = (category, country, region, producer, grapeVarietal) => {
     return forms.create({
-        'search_input': fields.string({
+        search_input: fields.string({
             label: 'Search Input',
             required: false,
             errorAfterField: true
         }),
-        'min_cost': fields.string({
+        min_cost: fields.string({
             required: false,
             errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
-        'max_cost': fields.string({
+        max_cost: fields.string({
             required: false,
             errorAfterField: true,
             validators: [validators.integer(), validators.min(0)]
         }),
-        'category_id': fields.string({
+        category_id: fields.string({
             label: 'Category',
             required: false,
             errorAfterField: true,
             widget: widgets.select(),
             choices: category
         }),
-        'country_id': fields.string({
+        country_id: fields.string({
             label: 'Country',
             required: false,
             errorAfterField: true,
             widget: widgets.select(),
             choices: country
         }),
-        'region_id': fields.string({
+        region_id: fields.string({
             label: 'Region',
             required: false,
             errorAfterField: true,
             widget: widgets.select(),
             choices: region
         }),
-        'producer_id': fields.string({
+        producer_id: fields.string({
             label: 'Producer',
             required: false,
             errorAfterField: true,
             widget: widgets.select(),
             choices: producer
         }),
-        'grape_varietal': fields.string({
+        grape_varietal: fields.string({
             required: false,
             errorAfterField: true,
             widget: widgets.multipleSelect(),
