@@ -37,7 +37,7 @@ wax.setLayoutPath("./views/layouts");
 // set up sessions
 app.use(session({
   store: new FileStore(),
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET_KEY,
   resave: false,
   saveUninitialized: true
 }));
@@ -96,6 +96,8 @@ async function main() {
 
 main();
 
-app.listen(3000, () => {
-  console.log("Server has started");
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
