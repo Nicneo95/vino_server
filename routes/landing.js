@@ -42,11 +42,9 @@ router.post('/login', (req, res) => {
 
 
             if (!user) {
-                console.log(1)
                 req.flash('error_messages', "Sorry, your login details are wrong")
-                res.redirect('/user/login')
+                res.redirect('/login')
             } else {
-                console.log('else')
                 if (user.get('user_type_id') == 1 || user.get('user_type_id') == 2) {
                     // FIXED HASHED PASSWORD HERE
                     if (user.get('password') === getHashedPassword(form.data.password)) {
@@ -61,19 +59,17 @@ router.post('/login', (req, res) => {
                         req.flash('success_messages', "You have logged in successfully")
                         res.redirect('/product-information/product')
                     } else {
-                        console.log(2)
                         req.flash('error_messages', "Sorry, your login details are wrong")
-                        res.redirect('/user/login')
+                        res.redirect('/login')
                     }
                 } else {
-                    console.log(3)
                     req.flash('error_messages', "You are not authorised to access this page");
-                    res.redirect('/');
+                    res.redirect('/login');
                 }
             }
         },
         'error': function (form) {
-            res.render('users/login', {
+            res.render('landing/login', {
                 'form': form.toHTML(bootstrapField)
             })
         }

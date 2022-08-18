@@ -294,42 +294,6 @@ const registrationForm = (userType) => {
     })
 }
 
-const updateUserForm = (userType) => {
-    return forms.create({
-        first_name: fields.string({
-            required: true,
-            errorAfterField: true,
-            validators: [
-                validators.required('Input required'),
-                validators.maxlength(255, "Exceed input field")
-            ]         
-        }),
-        last_name: fields.string({
-            required: true,
-            errorAfterField: true,
-            validators: [
-                validators.required('Input required'),
-                validators.maxlength(255, "Exceed input field")
-            ]       
-        }),
-        email: fields.email({
-            required: true,
-            errorAfterField: true,
-            validators: [
-                validators.required('Input required'),
-                validators.maxlength(320, "Exceed input field")
-            ]          
-        }),
-        user_type_id: fields.string({
-            label: 'User Type',
-            required: true,
-            errorAfterField: true,
-            widget: widgets.select(),
-            choices: userType
-        }),
-    })
-}
-
 const loginForm = () => {
     return forms.create({
         'email': fields.string({
@@ -411,7 +375,6 @@ module.exports = {
     sizeForm, 
     productForm, 
     registrationForm, 
-    updateUserForm,
     loginForm,
     searchProductForm,
 }

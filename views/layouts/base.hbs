@@ -23,6 +23,23 @@
     <a href="/logout" class="btn btn-sm btn-secondary">Logout</a>
   </div>
 </header>
+<div>
+  {{#if success_messages }}
+  {{#each success_messages}}
+  <div class="alert alert-success">
+    {{this}}
+  </div>
+  {{/each}}
+  {{/if}}
+
+  {{#if error_messages}}
+  {{#each error_messages}}
+  <div class="alert alert-danger">
+    {{this}}
+  </div>
+  {{/each}}
+  {{/if}}
+</div>
 {{!-- content of body --}}
 <div class="context">
   <div class="sidebar" data-sidebar>

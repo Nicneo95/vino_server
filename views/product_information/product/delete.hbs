@@ -3,6 +3,7 @@
 {{#block "content"}}
 <form method="POST">
     <div class="alert alert-danger">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
         Are you sure you want to delete {{product.name}} as a product?
         <div class="mt-3">
             <a href="/product-information/product" class="btn btn-success btn-sm">Cancel</a>
