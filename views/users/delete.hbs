@@ -1,0 +1,15 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<form method="POST">
+    <div class="alert alert-danger">
+        Are you sure you want to delete {{user.email}} as a user?
+        <div class="mt-3">
+            <a href="/user" class="btn btn-success btn-sm">Cancel</a>
+            <input type="submit" class="btn btn-danger btn-sm" value="Confirm" />
+        </div>
+    </div>
+</form>
+{{/block}}
+
+{{/extends}}

@@ -43,6 +43,15 @@ app.use(session({
 // enable CSRF
 app.use(csrf());
 
+app.use(flash())
+
+// Register Flash middleware
+app.use(function (req, res, next) {
+    res.locals.success_messages = req.flash("success_messages");
+    res.locals.error_messages = req.flash("error_messages");
+    next()
+  });
+
 // Share CSRF with hbs files
 app.use(function(req,res,next){
   res.locals.csrfToken = req.csrfToken();
@@ -57,15 +66,6 @@ app.use(function (err, req, res, next) {
       next()
   }
 });
-
-app.use(flash())
-
-// Register Flash middleware
-app.use(function (req, res, next) {
-    res.locals.success_messages = req.flash("success_messages");
-    res.locals.error_messages = req.flash("error_messages");
-    next()
-  });
 
 // Share the user data with hbs files
 app.use(function(req,res,next){

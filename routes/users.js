@@ -12,7 +12,7 @@ const { User, UserType } = require('../models');
 
 const userDAL = require('../dal/users');
 
-const { bootstrapField, registrationForm } = require('../forms');
+const { bootstrapField, registrationForm, updateUserForm } = require('../forms');
 
 // user CRUD route
 // user index route 
@@ -79,21 +79,22 @@ router.post('/user/create', async (req, res) => {
     })
 })
 // user update route 
-router.get('/user/:user_id/update', async (req,res) => {
+router.get('/user/:user_id/update', async (req, res) => {
     const user = await User.where({
-            'id': req.params.user_id
-        }).fetch({
-            require: true,
-            withRelated: ['user_type']
-        });
-    
+        'id': req.params.user_id
+    }).fetch({
+        require: true,
+        withRelated: ['user_type']
+    });
+
     const userType = await UserType.fetchAll().map(
         userType => [userType.get('id'), userType.get('name')]
     )
 
-    const form = registrationForm(userType);
+    const form = updateUserForm(userType);
 
-    form.fields.first_name.value = user.get('username')
+    form.fields.first_name.value = user.get('first_name')
+    form.fields.last_name.value = user.get('last_name')
     form.fields.email.value = user.get('email')
     form.fields.user_type_id.value = user.get('user_type_id')
 
@@ -102,5 +103,69 @@ router.get('/user/:user_id/update', async (req,res) => {
         user: user.toJSON(),
     })
 })
+// product update route 
+router.post('/user/:user_id/update', async function (req, res) {
 
+    const user = await User.where({
+        id: req.params.user_id
+    }).fetch({
+        require: true,
+        withRelated: [
+            'user_type',
+        ]
+    });
+
+    const userType = await UserType.fetchAll().map(
+        userType => [userType.get('id'), userType.get('name')]
+    );
+
+    const form = updateUserForm(userType);
+
+    form.handle(req, {
+        'success': async (form) => {
+
+            user.set(form.data)
+
+            await user.save();
+
+            req.flash("success_messages", `User ${user.get('first_name')} has been updated`)
+
+            res.redirect('/user');
+        },
+        'error': async (form) => {
+            res.render('users/update', {
+                form: form.toHTML(bootstrapField),
+                user: user.toJSON()
+            })
+        }
+    })
+})
+// product delete route
+router.get('/user/:user_id/delete', async function (req, res) {
+    const user = await User.where({
+        id: req.params.user_id
+    }).fetch({
+        require: true,
+        withRelated: [
+            'user_type',
+        ]
+    });
+    res.render('users/delete', {
+        user: user.toJSON()
+    })
+})
+//  product delete route 
+router.post('/user/:user_id/delete', async function (req, res) {
+    const user = await User.where({
+        id: req.params.user_id
+    }).fetch({
+        require: true,
+        withRelated: [
+            'user_type',
+        ]
+    });
+    await product.destroy();
+    res.redirect('/user')
+})
+ 
 module.exports = router
