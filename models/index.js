@@ -66,4 +66,25 @@ const UserType = bookshelf.model('UserType',{
     }
 })
 
-module.exports = { Product, Category, Country, Region, Producer, Size, GrapeVarietal, User, UserType };
+const CartItem = bookshelf.model('CartItem', {
+    tableName: 'cart_item',
+    product:function(){
+        return this.belongsTo('Product')
+    },
+    user:function(){
+        return this.belongsTo('User');
+    }
+})
+
+module.exports = { 
+    Product, 
+    Category, 
+    Country, 
+    Region, 
+    Producer, 
+    Size, 
+    GrapeVarietal, 
+    User, 
+    UserType, 
+    CartItem,
+};
