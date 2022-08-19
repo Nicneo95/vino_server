@@ -47,11 +47,8 @@ router.post('/category/create', async (req, res) => {
 })
 // category update route
 router.get('/category/:category_id/update', async function (req, res) {
-    const category = await Category.where({
-        id: req.params.category_id
-    }).fetch({
-        require: true
-    })
+    const category = await productDAL.getCategoryById(req.params.category_id)
+
     const form = categoryForm();
     form.fields.name.value = category.get('name')
 
@@ -62,11 +59,8 @@ router.get('/category/:category_id/update', async function (req, res) {
 })
 // category update route
 router.post('/category/:category_id/update', async function (req, res) {
-    const category = await Category.where({
-        id: req.params.category_id
-    }).fetch({
-        require: true
-    });
+    const category = await productDAL.getCategoryById(req.params.category_id)
+
     const form = categoryForm();
 
     form.handle(req, {
@@ -89,22 +83,16 @@ router.post('/category/:category_id/update', async function (req, res) {
 })
 // category delete route
 router.get('/category/:category_id/delete', async function (req, res) {
-    const category = await Category.where({
-        id: req.params.category_id
-    }).fetch({
-        require: true
-    });
+    const category = await productDAL.getCategoryById(req.params.category_id)
+
     res.render('product_information/category/delete', {
         category: category.toJSON()
     })
 })
 // category delete route
 router.post('/category/:category_id/delete', async function (req, res) {
-    const category = await Category.where({
-        id: req.params.category_id
-    }).fetch({
-        require: true
-    });
+    const category = await productDAL.getCategoryById(req.params.category_id)
+
     await category.destroy();
     res.redirect('/product-information/category')
 })
@@ -150,11 +138,7 @@ router.post('/country/create', async (req, res) => {
 })
 // country update route
 router.get('/country/:country_id/update', async function (req, res) {
-    const country = await Country.where({
-        id: req.params.country_id
-    }).fetch({
-        require: true
-    })
+    const country = await productDAL.getCountryByID(req.params.country_id)
 
     const form = countryForm();
     form.fields.name.value = country.get('name')
@@ -166,11 +150,8 @@ router.get('/country/:country_id/update', async function (req, res) {
 })
 // country update route
 router.post('/country/:country_id/update', async function (req, res) {
-    const country = await Country.where({
-        id: req.params.country_id
-    }).fetch({
-        require: true
-    })
+    const country = await productDAL.getCountryByID(req.params.country_id)
+
     const form = countryForm();
 
     form.handle(req, {
@@ -193,22 +174,16 @@ router.post('/country/:country_id/update', async function (req, res) {
 })
 // country delete route
 router.get('/country/:country_id/delete', async function (req, res) {
-    const country = await Country.where({
-        id: req.params.country_id
-    }).fetch({
-        require: true
-    })
+    const country = await productDAL.getCountryByID(req.params.country_id)
+
     res.render('product_information/country/delete', {
         country: country.toJSON()
     })
 })
 // country delete route
 router.post('/country/:country_id/delete', async function (req, res) {
-    const country = await Country.where({
-        id: req.params.country_id
-    }).fetch({
-        require: true
-    })
+    const country = await productDAL.getCountryByID(req.params.country_id)
+
     await country.destroy();
     res.redirect('/product-information/country')
 })
@@ -254,11 +229,7 @@ router.post('/producer/create', async (req, res) => {
 })
 // producer update route
 router.get('/producer/:producer_id/update', async function (req, res) {
-    const producer = await Producer.where({
-        id: req.params.producer_id
-    }).fetch({
-        require: true
-    });
+    const producer = await productDAL.getProducerById(req.params.producer_id);
 
     const form = producerForm();
     form.fields.name.value = producer.get('name')
@@ -271,11 +242,7 @@ router.get('/producer/:producer_id/update', async function (req, res) {
 })
 // producer update route
 router.post('/producer/:producer_id/update', async function (req, res) {
-    const producer = await Producer.where({
-        id: req.params.producer_id
-    }).fetch({
-        require: true
-    });
+    const producer = await productDAL.getProducerById(req.params.producer_id);
 
     const form = producerForm();
 
@@ -299,11 +266,7 @@ router.post('/producer/:producer_id/update', async function (req, res) {
 })
 // producer delete route
 router.get('/producer/:producer_id/delete', async function (req, res) {
-    const producer = await Producer.where({
-        id: req.params.producer_id
-    }).fetch({
-        require: true
-    });
+    const producer = await productDAL.getProducerById(req.params.producer_id);
 
     res.render('product_information/producer/delete', {
         producer: producer.toJSON()
@@ -311,11 +274,8 @@ router.get('/producer/:producer_id/delete', async function (req, res) {
 })
 // producer delete route
 router.post('/producer/:producer_id/delete', async function (req, res) {
-    const producer = await Producer.where({
-        id: req.params.producer_id
-    }).fetch({
-        require: true
-    });
+    const producer = await productDAL.getProducerById(req.params.producer_id);
+
     await producer.destroy();
     res.redirect('/product-information/producer')
 })
@@ -362,11 +322,8 @@ router.post('/region/create', async (req, res) => {
 })
 // region update route
 router.get('/region/:region_id/update', async function (req, res) {
-    const region = await Region.where({
-        id: req.params.region_id
-    }).fetch({
-        require: true
-    })
+    const region = await productDAL.getRegionByID(req.params.region_id);
+
     const form = regionForm();
     form.fields.name.value = region.get('name')
 
@@ -377,11 +334,8 @@ router.get('/region/:region_id/update', async function (req, res) {
 })
 // region update route
 router.post('/region/:region_id/update', async function (req, res) {
-    const region = await Region.where({
-        id: req.params.region_id
-    }).fetch({
-        require: true
-    });
+    const region = await productDAL.getRegionByID(req.params.region_id);
+
     const form = regionForm();
 
     form.handle(req, {
@@ -404,22 +358,16 @@ router.post('/region/:region_id/update', async function (req, res) {
 })
 // region delete route
 router.get('/region/:region_id/delete', async function (req, res) {
-    const region = await Region.where({
-        id: req.params.region_id
-    }).fetch({
-        require: true
-    });
+    const region = await productDAL.getRegionByID(req.params.region_id);
+
     res.render('product_information/region/delete', {
         region: region.toJSON()
     })
 })
 // region delete route
 router.post('/region/:region_id/delete', async function (req, res) {
-    const region = await Region.where({
-        id: req.params.region_id
-    }).fetch({
-        require: true
-    });
+    const region = await productDAL.getRegionByID(req.params.region_id);
+
     await region.destroy();
     res.redirect('/product-information/region')
 })
@@ -466,11 +414,7 @@ router.post('/grape-varietal/create', async (req, res) => {
 })
 // grape varietal update route 
 router.get('/grape-varietal/:grape_varietal_id/update', async function (req, res) {
-    const grapeVarietal = await GrapeVarietal.where({
-        id: req.params.grape_varietal_id
-    }).fetch({
-        require: true
-    });
+    const grapeVarietal = await productDAL.getGrapeVarietalByID(req.params.grape_varietal_id);
 
     const form = grapeVarietalForm();
     form.fields.name.value = grapeVarietal.get('name')
@@ -482,11 +426,7 @@ router.get('/grape-varietal/:grape_varietal_id/update', async function (req, res
 })
 // grape varietal update route 
 router.post('/grape-varietal/:grape_varietal_id/update', async function (req, res) {
-    const grapeVarietal = await GrapeVarietal.where({
-        id: req.params.grape_varietal_id
-    }).fetch({
-        require: true
-    });
+    const grapeVarietal = await productDAL.getGrapeVarietalByID(req.params.grape_varietal_id);
 
     const form = grapeVarietalForm();
 
@@ -510,11 +450,7 @@ router.post('/grape-varietal/:grape_varietal_id/update', async function (req, re
 })
 // grape varietal delete route 
 router.get('/grape-varietal/:grape_varietal_id/delete', async function (req, res) {
-    const grapeVarietal = await GrapeVarietal.where({
-        id: req.params.grape_varietal_id
-    }).fetch({
-        require: true
-    });
+    const grapeVarietal = await productDAL.getGrapeVarietalByID(req.params.grape_varietal_id);
 
     res.render('product_information/grape_varietal/delete', {
         grapeVarietal: grapeVarietal.toJSON()
@@ -522,11 +458,7 @@ router.get('/grape-varietal/:grape_varietal_id/delete', async function (req, res
 })
 // grape varietal delete route 
 router.post('/grape-varietal/:grape_varietal_id/delete', async function (req, res) {
-    const grapeVarietal = await GrapeVarietal.where({
-        id: req.params.grape_varietal_id
-    }).fetch({
-        require: true
-    });
+    const grapeVarietal = await productDAL.getGrapeVarietalByID(req.params.grape_varietal_id);
 
     await grapeVarietal.destroy();
     res.redirect('/product-information/grape-varietal')
@@ -573,11 +505,7 @@ router.post('/size/create', async (req, res) => {
 })
 // size update route 
 router.get('/size/:size_id/update', async function (req, res) {
-    const size = await Size.where({
-        id: req.params.size_id
-    }).fetch({
-        require: true
-    });
+    const size = await productDAL.getSizeByID(req.params.size_id);
 
     const form = sizeForm();
     form.fields.name.value = size.get('name')
@@ -590,11 +518,7 @@ router.get('/size/:size_id/update', async function (req, res) {
 })
 // size update route
 router.post('/size/:size_id/update', async function (req, res) {
-    const size = await Size.where({
-        id: req.params.size_id
-    }).fetch({
-        require: true
-    });
+    const size = await productDAL.getSizeByID(req.params.size_id);
 
     const form = sizeForm();
 
@@ -618,22 +542,16 @@ router.post('/size/:size_id/update', async function (req, res) {
 })
 // size delete route
 router.get('/size/:size_id/delete', async function (req, res) {
-    const size = await Size.where({
-        id: req.params.size_id
-    }).fetch({
-        require: true
-    });
+    const size = await productDAL.getSizeByID(req.params.size_id);
+
     res.render('product_information/size/delete', {
         size: size.toJSON()
     })
 })
 // size delete route 
 router.post('/size/:size_id/delete', async function (req, res) {
-    const size = await Size.where({
-        id: req.params.size_id
-    }).fetch({
-        require: true
-    });
+    const size = await productDAL.getSizeByID(req.params.size_id);
+
     await size.destroy();
     res.redirect('/product-information/size')
 })
@@ -661,11 +579,11 @@ router.get('/product', async function (req, res) {
 
             if (form.data.search_input) {
                 q = q.query(qb => {
-                        qb.where('name', 'like', '%' + form.data.search_input + '%')
+                    qb.where('name', 'like', '%' + form.data.search_input + '%')
                         .orWhere('description', 'like', '%' + form.data.search_input + '%')
                         .orWhere('nose_attribute', 'like', '%' + form.data.search_input + '%')
                         .orWhere('mouth_attribute', 'like', '%' + form.data.search_input + '%')
-                    })
+                })
             }
 
             if (form.data.min_cost) {
@@ -730,7 +648,7 @@ router.get('/product', async function (req, res) {
             })
         },
         // situation if empty show all
-        'empty' : async function(form){
+        'empty': async function (form) {
             let product = await q.fetch({
                 withRelated: [
                     'category',
@@ -750,24 +668,12 @@ router.get('/product', async function (req, res) {
 })
 // product create route 
 router.get('/product/create', async function (req, res) {
-    const allCategories = await Category.fetchAll().map(category => {
-        return [category.get('id'), category.get('name')]
-    });
-    const allCountries = await Country.fetchAll().map(country => {
-        return [country.get('id'), country.get('name')]
-    });
-    const allRegions = await Region.fetchAll().map(region => {
-        return [region.get('id'), region.get('name')]
-    });
-    const allProducers = await Producer.fetchAll().map(producer => {
-        return [producer.get('id'), producer.get('name')]
-    });
-    const allSizes = await Size.fetchAll().map(size => {
-        return [size.get('id'), size.get('name')]
-    });
-    const allGrapeVarieties = await GrapeVarietal.fetchAll().map(grapeVarietal => {
-        return [grapeVarietal.get('id'), grapeVarietal.get('name')]
-    });
+    const allCategories = await productDAL.getAllCategories()
+    const allCountries = await productDAL.getAllCountries()
+    const allRegions = await productDAL.getAllRegions()
+    const allProducers = await productDAL.getAllProducers()
+    const allSizes = await productDAL.getAllSizes()
+    const allGrapeVarieties = await productDAL.getAllGrapeVarietals()
 
     const form = productForm(
         allCategories,
@@ -777,7 +683,7 @@ router.get('/product/create', async function (req, res) {
         allSizes,
         allGrapeVarieties
     );
-    
+
     res.render('product_information/product/create', {
         form: form.toHTML(bootstrapField),
         cloudinaryName: process.env.CLOUDINARY_NAME,
@@ -788,24 +694,12 @@ router.get('/product/create', async function (req, res) {
 })
 // product create route 
 router.post('/product/create', async function (req, res) {
-    const allCategories = await Category.fetchAll().map(category => {
-        return [category.get('id'), category.get('name')]
-    });
-    const allCountries = await Country.fetchAll().map(country => {
-        return [country.get('id'), country.get('name')]
-    });
-    const allRegions = await Region.fetchAll().map(region => {
-        return [region.get('id'), region.get('name')]
-    });
-    const allProducers = await Producer.fetchAll().map(producer => {
-        return [producer.get('id'), producer.get('name')]
-    });
-    const allSizes = await Size.fetchAll().map(size => {
-        return [size.get('id'), size.get('name')]
-    });
-    const allGrapeVarieties = await GrapeVarietal.fetchAll().map(grapeVarietal => {
-        return [grapeVarietal.get('id'), grapeVarietal.get('name')]
-    });
+    const allCategories = await productDAL.getAllCategories()
+    const allCountries = await productDAL.getAllCountries()
+    const allRegions = await productDAL.getAllRegions()
+    const allProducers = await productDAL.getAllProducers()
+    const allSizes = await productDAL.getAllSizes()
+    const allGrapeVarieties = await productDAL.getAllGrapeVarietals()
 
     const form = productForm(
         allCategories,
@@ -854,40 +748,14 @@ router.post('/product/create', async function (req, res) {
 });
 // product update route 
 router.get('/product/:product_id/update', async function (req, res) {
+    const product = await productDAL.getProductById(req.params.product_id)
 
-    const product = await Product.where({
-        id: req.params.product_id
-    }).fetch({
-        require: true,
-        withRelated: [
-            'category',
-            'country',
-            'region',
-            'producer',
-            'size',
-            'grape_varietal',
-        ]
-    });
-
-    const allCategories = await Category.fetchAll().map(category => {
-        return [category.get('id'), category.get('name')]
-    });
-    const allCountries = await Country.fetchAll().map(country => {
-        return [country.get('id'), country.get('name')]
-    });
-    const allRegions = await Region.fetchAll().map(region => {
-        return [region.get('id'), region.get('name')]
-    });
-    const allProducers = await Producer.fetchAll().map(producer => {
-        return [producer.get('id'), producer.get('name')]
-    });
-    const allSizes = await Size.fetchAll().map(size => {
-        return [size.get('id'), size.get('name')]
-    });
-    const allGrapeVarieties = await GrapeVarietal.fetchAll().map(grapeVarietal => {
-        return [grapeVarietal.get('id'), grapeVarietal.get('name')]
-    });
-
+    const allCategories = await productDAL.getAllCategories()
+    const allCountries = await productDAL.getAllCountries()
+    const allRegions = await productDAL.getAllRegions()
+    const allProducers = await productDAL.getAllProducers()
+    const allSizes = await productDAL.getAllSizes()
+    const allGrapeVarieties = await productDAL.getAllGrapeVarietals()
 
     const form = productForm(
         allCategories,
@@ -929,40 +797,14 @@ router.get('/product/:product_id/update', async function (req, res) {
 })
 // product update route 
 router.post('/product/:product_id/update', async function (req, res) {
+    const product = await productDAL.getProductById(req.params.product_id)
 
-    const product = await Product.where({
-        id: req.params.product_id
-    }).fetch({
-        require: true,
-        withRelated: [
-            'category',
-            'country',
-            'region',
-            'producer',
-            'size',
-            'grape_varietal'
-        ]
-    });
-
-    const allCategories = await Category.fetchAll().map(category => {
-        return [category.get('id'), category.get('name')]
-    });
-    const allCountries = await Country.fetchAll().map(country => {
-        return [country.get('id'), country.get('name')]
-    });
-    const allRegions = await Region.fetchAll().map(region => {
-        return [region.get('id'), region.get('name')]
-    });
-    const allProducers = await Producer.fetchAll().map(producer => {
-        return [producer.get('id'), producer.get('name')]
-    });
-    const allSizes = await Size.fetchAll().map(size => {
-        return [size.get('id'), size.get('name')]
-    });
-    const allGrapeVarieties = await GrapeVarietal.fetchAll().map(grapeVarietal => {
-        return [grapeVarietal.get('id'), grapeVarietal.get('name')]
-    });
-
+    const allCategories = await productDAL.getAllCategories()
+    const allCountries = await productDAL.getAllCountries()
+    const allRegions = await productDAL.getAllRegions()
+    const allProducers = await productDAL.getAllProducers()
+    const allSizes = await productDAL.getAllSizes()
+    const allGrapeVarieties = await productDAL.getAllGrapeVarietals()
 
     const form = productForm(
         allCategories,
@@ -1012,38 +854,16 @@ router.post('/product/:product_id/update', async function (req, res) {
 })
 // product delete route
 router.get('/product/:product_id/delete', async function (req, res) {
-    const product = await Product.where({
-        id: req.params.product_id
-    }).fetch({
-        require: true,
-        withRelated: [
-            'category',
-            'country',
-            'region',
-            'producer',
-            'grape_varietal',
-            'size'
-        ]
-    });
+    const product = await productDAL.getProductById(req.params.product_id)
+
     res.render('product_information/product/delete', {
         product: product.toJSON()
     })
 })
 //  product delete route 
 router.post('/product/:product_id/delete', async function (req, res) {
-    const product = await Product.where({
-        id: req.params.product_id
-    }).fetch({
-        require: true,
-        withRelated: [
-            'category',
-            'country',
-            'region',
-            'producer',
-            'grape_varietal',
-            'size'
-        ]
-    });
+    const product = await productDAL.getProductById(req.params.product_id)
+
     await product.destroy();
     res.redirect('/product-information/product')
 })

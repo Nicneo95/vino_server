@@ -42,8 +42,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
-
 // enable flash
 app.use(flash());
 
@@ -68,7 +66,7 @@ app.use(function (req, res, next) {
   res.locals.csrfToken = req.csrfToken();
   next()
 });
-
+// token expire error
 app.use(function (err, req, res, next) {
   if (err && err.code == "EBADCSRFTOKEN") {
     console.log(req.flash)
@@ -77,6 +75,10 @@ app.use(function (err, req, res, next) {
   } else {
     next()
   }
+});
+
+hbs.registerHelper('divide', function(leftValue,rightValue) {
+  return (leftValue/rightValue)
 });
 
 const { checkIfAuthorised, modifiedUser } = require('./middlewares');
