@@ -2,17 +2,24 @@
 
 {{#block 'content'}}
 <h1>My shopping cart</h1>
-
+<a href="/checkout" class="btn btn-secondary">Checkout</a>
 <ul class="list-group">
     {{#each shoppingCart}}
     <li class="list-group-item my-3">
         <h4>{{this.product.name}}</h3>
-            <h5>Category: {{this.product.category.name}}</h5>
-            <h5>Cost: {{this.price}} </h5>        
-            <h5>Quantity:{{this.stock}}</h5>  
+            <h5>Price: {{this.product.price}} </h5>
+            <h5>Stock: {{this.product.stock}} </h5>
+            <form method="POST" action="/cart/{{this.product_id}}/quantity/update">
+                <input type="hidden" value="{{../csrfToken}}" name="_csrf" />
+                <h5>
+                    Quantity: <input type="text" name="newQuantity" value="{{this.quantity}}" style="width:30px" />
+                    <input type="submit" value="Update Quantity" class="btn btn-success btn-sm" />
+                </h5>
+            </form>
+
             <div>
                 <a href="/cart/{{this.product.id}}/remove" class="btn btn-danger">Remove</a>
-            </div> 
+            </div>
     </li>
     {{/each}}
 </ul>
