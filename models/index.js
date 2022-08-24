@@ -80,6 +80,37 @@ const BlacklistedToken = bookshelf.model('BlacklistedToken',{
     tableName: 'blacklisted_token'
 })
 
+const Order = bookshelf.model('Order',{
+    tableName: 'orders',
+    user: function() {
+        return this.belongsTo('User')
+    },
+    order_status: function() {
+        return this.belongsTo('OrderStatus')
+    },
+    order_breakdowns: function() {
+        return this.hasMany('OrderBreakdown')
+    },
+    products: function() {
+        return this.belongsToMany('Product');
+    }
+})
+
+const OrderBreakdown = bookshelf.model('OrderBreakdown', {
+    tableName: 'orders_product',
+    order: function() {
+        return this.belongsTo('Order')
+    },
+    product: function () {
+        return this.belongsTo("Product");
+    }
+})
+
+
+const OrderStatus = bookshelf.model('OrderStatus',{
+    tableName: 'order_status'
+})
+
 module.exports = { 
     Product, 
     Category, 
@@ -91,5 +122,8 @@ module.exports = {
     User, 
     UserType, 
     CartItem,
-    BlacklistedToken
+    BlacklistedToken,
+    Order,
+    OrderBreakdown,
+    OrderStatus
 };

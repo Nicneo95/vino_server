@@ -1,0 +1,17 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<form method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+    <div class="alert alert-danger">
+        Are you sure you want to delete order: {{order.id}}?
+        <div class="mt-3">
+            <a href="/order-information" class="btn btn-success btn-sm">Cancel</a>
+            <input type="submit" class="btn btn-danger btn-sm" value="Confirm"/>
+        </div>
+    </div>
+
+</form>
+{{/block}}
+
+{{/extends}}

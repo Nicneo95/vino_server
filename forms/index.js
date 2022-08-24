@@ -365,6 +365,47 @@ const searchProductForm = (category, country, region, producer, grapeVarietal) =
     })
 }
 
+const searchOrderForm = function (orderStatuses, products) {
+    return forms.create({
+        'order_status_id': fields.string({
+            label: 'Order Status',
+            required: false,
+            errorAfterField: true,
+            widget: widgets.multipleSelect(),
+            choices: orderStatuses
+        }),
+        'products': fields.string({
+            label: 'Product',
+            required: false,
+            errorAfterField: true,
+            widget: widgets.multipleSelect(),
+            choices: products
+        }),
+        'min_amount': fields.string({
+            required: false,
+            errorAfterField: true,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+        'max_amount': fields.string({
+            required: false,
+            errorAfterField: true,
+            validators: [validators.integer(), validators.min(0)]
+        }),
+    })
+}
+
+const orderForm = (orderStatuses) => {
+    return forms.create({
+        order_status_id: fields.string({
+            label: 'Order Status',
+            required: true,
+            errorAfterField: true,
+            widget: widgets.select(),
+            choices: orderStatuses
+        }),
+    })
+}
+
 module.exports = { 
     bootstrapField, 
     categoryForm, 
@@ -377,4 +418,6 @@ module.exports = {
     registrationForm, 
     loginForm,
     searchProductForm,
+    searchOrderForm,
+    orderForm
 }

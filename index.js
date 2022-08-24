@@ -60,20 +60,20 @@ app.use(function (req, res, next) {
 
 // enable CSRF
 const csurfInstance = csrf();
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
 
-    if (req.url === '/checkout/process_payment' || req.url.slice(0,5)=='/api/') {
-        next();
-    } else {
-        csurfInstance(req,res,next);
-    }
+  if (req.url === '/checkout/process_payment' || req.url.slice(0, 5) == '/api/') {
+    next();
+  } else {
+    csurfInstance(req, res, next);
+  }
 });
 
 // Share CSRF with hbs files
 app.use(function (req, res, next) {
   if (req.csrfToken) {
     res.locals.csrfToken = req.csrfToken();
-}
+  }
   next()
 });
 // token expire error
@@ -87,32 +87,35 @@ app.use(function (err, req, res, next) {
   }
 });
 
-hbs.registerHelper('divide', function(leftValue,rightValue) {
-  return (leftValue/rightValue)
+hbs.registerHelper('divide', function (leftValue, rightValue) {
+  return (leftValue / rightValue)
 });
 
 const { checkIfAuthorised, modifiedUser } = require('./middlewares');
 
-// import in routes
-const landingRoutes = require('./routes/landing');
-const productRoutes = require('./routes/products');
-const userRoutes = require('./routes/users');
-const cloudinaryRoutes = require('./routes/cloudinary');
-const cartRoutes = require('./routes/api/cart');
-const checkoutRoutes = require('./routes/api/checkout');
+const http = {
+  landingRoutes: require('./routes/landing'),
+  productRoutes: require('./routes/products'),
+  userRoutes: require('./routes/users'),
+  cloudinaryRoutes: require('./routes/cloudinary'),
+  orderRoutes: require('./routes/orders')
+}
 
 const api = {
   products: require('./routes/api/products'),
-  users: require('./routes/api/users')
+  users: require('./routes/api/users'),
+  cartRoutes: require('./routes/api/cart'),
+  checkoutRoutes: require('./routes/api/checkout')
 }
 
 async function main() {
-  app.use('/', landingRoutes),
-  app.use('/product-information', checkIfAuthorised, productRoutes);
-  app.use('/user', modifiedUser, userRoutes);
-  app.use('/cloudinary', cloudinaryRoutes);
-  app.use('/cart', cartRoutes);
-  app.use('/checkout', checkoutRoutes);
+  app.use('/', http.landingRoutes),
+  app.use('/product-information', checkIfAuthorised, http.productRoutes);
+  app.use('/user', modifiedUser, http.userRoutes);
+  app.use('/order-information', checkIfAuthorised, http.orderRoutes)
+  app.use('/cloudinary', http.cloudinaryRoutes);
+  app.use('/cart', api.cartRoutes);
+  app.use('/checkout', api.checkoutRoutes);
   app.use('/api/product', express.json(), api.products);
   app.use('/api/user', express.json(), api.users);
 }

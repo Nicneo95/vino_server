@@ -1,0 +1,65 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<h1>Order</h1>
+<div class="accordion-item mt-1">
+    <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo">
+            <h5>Search</h5>
+        </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <form method="GET">
+                {{{searchForm}}}
+                <input type="submit" class="btn btn-secondary mt-3" value="Search">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="tableHolder mt-3">
+    <table class="table display" id="example">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User Id</th>
+                <th>Total Amount</th>
+                <th>Payment reference</th>
+                <th>Shipping Address</th>
+                <th>Status</th>
+                <th>Products</th>
+                <th>Date Placed</th>
+                <th>Date Updated</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.user_id}}</td>
+                <td>{{this.total_amount}}</td>
+                <td>{{this.payment_reference}}</td>
+                <td>{{this.shipping_address}}</td>
+                <td>{{this.order_status.name}}</td>
+                <td>
+                    {{#each this.products}}
+                    <span class="badge bg-secondary">{{this.name}}</span>
+                    {{/each}}
+                </td>
+                <td>{{this.date_placed}}</td>
+                <td>{{this.date_updated}}</td>
+                <td>
+                    <a class="btn btn-secondary btn-sm" href="/order-information/{{this.id}}/update">Update</a>
+                    <a class="btn btn-danger btn-sm" href="/order-information/{{this.id}}/delete">Delete</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{/block}}
+
+{{/extends}}

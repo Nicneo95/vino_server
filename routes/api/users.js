@@ -3,7 +3,7 @@ const router = express.Router();
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
-const { BlacklistedToken } = require('../../models')
+const { User, BlacklistedToken } = require('../../models')
 const userDAL = require('../../dal/users')
 const { checkIfAuthenticatedJWT } = require('../../middlewares')
 
@@ -95,8 +95,38 @@ router.post('/logout', async (req, res) => {
     }
 });
 
+router.post('/register', async (req, res) => {
+    const newUser = new User(
+        req.body.email,
+        req.body.password,
+        req.body.first_name,
+        req.body.last_name
+    );
 
+    let user = await userDAL.getUserByEmail(email)
 
+        if(user){
 
+            return res.status(400).send({"message" : "This email has been used to sign up for an account"})
+
+        } else {
+            let newUser = new User({
+                first_name,
+                last_name,
+                email,
+                password : getHashedPassword(password),
+                user_type_id: 3
+            })
+            await newUser.save()
+
+            let accessToken = generateToken(newUser.toJSON(), process.env.TOKEN_SECRET, "900s");
+            let refreshToken = generateToken(newUser.toJSON(), process.env.REFRESH_TOKEN_SECRET, "1w");
+
+            return res.status(200).send({
+                accessToken,
+                refreshToken
+            })
+        }
+});
 
 module.exports = router;
