@@ -2,6 +2,10 @@
   "name": "wine-o-wine-co._server",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
   "repository": "https://github.com/Nicneo95/wine-o-wine-co._server.git",
   "author": "Nicneo95 <neo.hongsheng@trentglobal.edu.sg>",
   "license": "MIT",

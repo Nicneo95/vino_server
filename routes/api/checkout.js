@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+const { checkIfAuthenticatedJWT } = require('../../middlewares');
 const CartServices = require('../../services/cart'); 
 const OrderServices = require('../../services/orders')
 const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
-router.get('/',  async (req, res) => {
-    const cart = new CartServices(req.session.user.id);
+router.get('/', checkIfAuthenticatedJWT, async (req, res) => {
+    const cart = new CartServices(req.user.id);
 
     // get all the items from the cart
     let items = await cart.getCart();
@@ -35,7 +36,7 @@ router.get('/',  async (req, res) => {
     // step 2 - create stripe payment
     let metaData = JSON.stringify(meta);
     const payment = {
-        client_reference_id: req.session.user.id,
+        client_reference_id: req.user.id,
         payment_method_types: ['card'],
         shipping_address_collection: {
             allowed_countries: ['SG'],
