@@ -3,7 +3,7 @@ const router = express.Router();
 const orderDAL = require('../dal/orders')
 const productDAL = require('../dal/products')
 
-const { Order, OrderBreakdown, OrderStatus } = require('../models');
+const { Order } = require('../models');
 
 const { bootstrapField, searchOrderForm, orderForm } = require('../forms');
 
@@ -38,7 +38,7 @@ router.get('/', async function (req, res) {
             }
 
             let orders = await q.fetch({
-                withRelated: ['order_status', 'product', 'order_breakdowns']
+                withRelated: ['order_status', 'products', 'order_breakdowns']
             })
 
             res.render('order_information/index', {
@@ -48,7 +48,7 @@ router.get('/', async function (req, res) {
         },
         'error': async function (form) {
             let orders = await q.fetch({
-                withRelated: ['order_status', 'product', 'order_breakdowns']
+                withRelated: ['order_status', 'products', 'order_breakdowns']
             })
 
             res.render('order_information/index', {
@@ -59,7 +59,7 @@ router.get('/', async function (req, res) {
         },
         'empty': async function (form) {
             let orders = await q.fetch({
-                withRelated: ['order_status', 'product', 'order_breakdowns']
+                withRelated: ['order_status', 'products', 'order_breakdowns']
             })
 
             res.render('order_information/index', {
@@ -70,7 +70,7 @@ router.get('/', async function (req, res) {
     })
 })
 
-router.get('/order/:order_id/update', async function (req, res) {
+router.get('/:order_id/update', async function (req, res) {
 
     const order = await orderDAL.getOrderById(req.params.order_id)
     const allOrderStatuses = await orderDAL.getAllOrderStatuses()
@@ -84,7 +84,7 @@ router.get('/order/:order_id/update', async function (req, res) {
 
 })
 
-router.post('/order/:order_id/update', async function (req, res) {
+router.post('/:order_id/update', async function (req, res) {
 
     const order = await orderDAL.getOrderById(req.params.order_id)
 
@@ -113,7 +113,7 @@ router.post('/order/:order_id/update', async function (req, res) {
 
 })
 
-router.get('/order/:order_id/delete', async function (req, res) {
+router.get('/:order_id/delete', async function (req, res) {
     const order = await orderDAL.getOrderById(req.params.order_id)
 
     res.render('order_information/delete', {
@@ -121,7 +121,7 @@ router.get('/order/:order_id/delete', async function (req, res) {
     })
 })
 
-router.post('/order/:order_id/delete', async function (req, res) {
+router.post('/:order_id/delete', async function (req, res) {
     const order = await orderDAL.getOrderById(req.params.order_id)
     await order.destroy();
     res.redirect('/order-information')

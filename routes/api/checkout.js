@@ -47,8 +47,6 @@ router.get('/',  async (req, res) => {
             'orders': metaData
         }
     }
-    console.log(metaData)
-    console.log(payment)
 
     // step 3: register the session
     let stripeSession = await Stripe.checkout.sessions.create(payment)
@@ -69,6 +67,7 @@ router.post('/process_payment', express.raw({type: 'application/json'}), async (
         event = Stripe.webhooks.constructEvent(payload, sigHeader, endpointSecret);
         if (event.type ==  "checkout.session.completed") {
             let stripeEvent = event.data.object;
+            console.log(stripeEvent)
 
             await OrderServices.createOrder(stripeEvent)
 

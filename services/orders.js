@@ -6,33 +6,33 @@ async function createOrderBreakdown(orderId, orderData){
     return await orderDAL.createOrderBreakdown(orderId, orderData)
 }
 
-async function createOrder(stripeSessionEvent) {
+async function createOrder(stripeEvent) {
 
     console.log('testing order creation')
 
     let shippingAddress = `
-    Addressee: ${stripeSessionEvent.shipping.name}
-    -Address Line 1: ${stripeSessionEvent.shipping.address.line1}
-    -Address Line 2: ${stripeSessionEvent.shipping.address.line2}
-    -City: ${stripeSessionEvent.shipping.address.city}
-    -State: ${stripeSessionEvent.shipping.address.state}
-    -Country: ${stripeSessionEvent.shipping.address.country}
-    -Postcode: ${stripeSessionEvent.shipping.address.postal_code}
+    Addressee: ${stripeEvent.shipping.name}
+    -Address Line 1: ${stripeEvent.shipping.address.line1}
+    -Address Line 2: ${stripeEvent.shipping.address.line2}
+    -City: ${stripeEvent.shipping.address.city}
+    -State: ${stripeEvent.shipping.address.state}
+    -Country: ${stripeEvent.shipping.address.country}
+    -Postcode: ${stripeEvent.shipping.address.postal_code}
     `
     let orderData = {
-        total_amount: stripeSessionEvent.amount_total,
-        payment_reference: stripeSessionEvent.payment_intent,
-        user_id: stripeSessionEvent.client_reference_id,
+        total_amount: stripeEvent.amount_total,
+        payment_reference: stripeEvent.payment_intent,
+        user_id: stripeEvent.client_reference_id,
         shipping_address: shippingAddress,
     }
 
     let newOrderId = await orderDAL.createOrder(orderData)
 
-    let allOrderedItems = JSON.parse(stripeSessionEvent.metadata.orders)
+    let allOrderedItems = JSON.parse(stripeEvent.metadata.orders)
 
     allOrderedItems.map( async(item) => {
         await orderDAL.createOrderBreakdown(newOrderId, item)
-        await cartDAL.removeFromCart(stripeSessionEvent.client_reference_id, item.product_id)
+        await cartDAL.removeFromCart(stripeEvent.client_reference_id, item.product_id)
 
         let productToUpdate = await productDAL.getProductById(item.product_id)
 

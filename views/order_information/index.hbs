@@ -40,7 +40,7 @@
             <tr>
                 <td>{{this.id}}</td>
                 <td>{{this.user_id}}</td>
-                <td>{{this.total_amount}}</td>
+                <td>{{divide this.total_amount 100}}</td> 
                 <td>{{this.payment_reference}}</td>
                 <td>{{this.shipping_address}}</td>
                 <td>{{this.order_status.name}}</td>
@@ -52,8 +52,8 @@
                 <td>{{this.date_placed}}</td>
                 <td>{{this.date_updated}}</td>
                 <td>
-                    <a class="btn btn-secondary btn-sm" href="/order-information/{{this.id}}/update">Update</a>
-                    <a class="btn btn-danger btn-sm" href="/order-information/{{this.id}}/delete">Delete</a>
+                    <a class="btn btn-secondary btn-sm m-1" href="/order-information/{{this.id}}/update">Update</a>
+                    <a class="btn btn-danger btn-sm m-1" href="/order-information/{{this.id}}/delete">Delete</a>
                 </td>
             </tr>
             {{/each}}

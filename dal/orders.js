@@ -51,7 +51,7 @@ async function createOrder(orderData) {
     const newOrder = new Order({
         total_amount: orderData.total_amount,
         payment_reference: orderData.payment_reference,
-        order_status_id: 2,
+        order_status_id: 4,
         user_id: orderData.user_id,
         shipping_address: orderData.shipping_address,
         date_placed: new Date(),
