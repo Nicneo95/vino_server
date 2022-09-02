@@ -87,20 +87,6 @@ const regionForm = () => {
     })
 }
 
-const grapeVarietalForm = () => {
-    return forms.create({
-        name: fields.string({
-            label: 'Grape Varietal',
-            required: true,
-            errorAfterField: true,
-            validators: [
-                validators.required("Please enter the name of the region"),
-                validators.maxlength(255, "Please enter a name shorter than 255 characters")
-            ]
-        }),
-    })
-}
-
 const sizeForm = () => {
     return forms.create({
         name: fields.string({
@@ -125,7 +111,21 @@ const sizeForm = () => {
     })
 }
 
-const productForm = (category, country, region, producer, grapeVarietal, size) => {
+const grapeVarietalForm = () => {
+    return forms.create({
+        name: fields.string({
+            label: 'Grape Varietal',
+            required: true,
+            errorAfterField: true,
+            validators: [
+                validators.required("Please enter the name of the region"),
+                validators.maxlength(255, "Please enter a name shorter than 255 characters")
+            ]
+        }),
+    })
+}
+
+const productForm = (category, country, region, producer, size, grapeVarietal) => {
     return forms.create({
         name: fields.string({
             label: 'Name Of Wine',
@@ -165,14 +165,14 @@ const productForm = (category, country, region, producer, grapeVarietal, size) =
             choices: country
         }),
         size: fields.string({
-            label: 'Grape Varietal',
+            label: 'Size',
             required: true,
             errorAfterField: true,
             widget: widgets.multipleSelect(),
             choices: size
         }),
         grape_varietal: fields.string({
-            label: 'Size',
+            label: 'Grape Varietal',
             required: true,
             errorAfterField: true,
             widget: widgets.multipleSelect(),

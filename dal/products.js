@@ -102,8 +102,8 @@ async function getProductById(productId) {
             'country',
             'region',
             'producer',
+            'size',
             'grape_varietal',
-            'size'
         ]
     });
 };
